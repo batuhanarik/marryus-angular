@@ -22,10 +22,16 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/ng-zorro-antd.less"
             ],
             "scripts": []
           },
@@ -51,7 +57,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "./src/environments/environment.ts",
+                  "with": "./src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
