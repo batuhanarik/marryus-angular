@@ -2,9 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { WeddingPlace } from '../models/weddingPlace';
 
 @Pipe({
-  name: 'filterpipe',
-  standalone:true,
-  
+  name: 'filterpipe',  
 })
 export class FilterPipe implements PipeTransform {
   filterText: string = '';

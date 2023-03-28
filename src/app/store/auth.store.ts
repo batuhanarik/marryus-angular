@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createStore, setProps, withProps } from '@ngneat/elf';
 import { localStorageStrategy, persistState } from '@ngneat/elf-persist-state';
-import { LoginResponse } from '../models/login.model';
+import { AuthResponse } from '../models/auth.model';
 
 interface AuthProps {
   token: string | null;
@@ -21,7 +21,7 @@ export const persist = persistState(authStore, {
 export class AuthStore {
   private readonly store = authStore;
 
-  setState(state: LoginResponse) {
+  setState(state: AuthResponse) {
     this.store.update(setProps(state));
   }
 

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { catchError, of } from 'rxjs';
-import { LoginInput } from 'src/app/models/login.model';
+import { LoginInput } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 

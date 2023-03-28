@@ -1,17 +1,21 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="mb-4">
     <input
+      formControlName="email"
       type="email"
       placeholder="Eposta adresi"
       class="input input-bordered w-full"
     />
   </div>
   <div class="mb-4">
-    <input type="text" placeholder="İsim" class="input input-bordered w-full" />
+    <input type="text" 
+    formControlName="firstName"
+    placeholder="İsim" class="input input-bordered w-full" />
   </div>
   <div class="mb-4">
     <input
       type="text"
+      formControlName="lastName"
       placeholder="Soyisim"
       class="input input-bordered w-full"
     />
@@ -19,6 +23,7 @@
   <div class="mb-4">
     <input
       type="password"
+      formControlName="password"
       placeholder="Şifre"
       class="input input-bordered w-full"
     />
@@ -26,9 +31,16 @@
   <div class="mb-4">
     <input
       type="text"
+      formControlName="phoneNumber"
       placeholder="Telefon"
       class="input input-bordered w-full"
     />
+  </div>
+  <div class="mb-4">
+    <label class="cursor-pointer label">
+      <span class="label-text">Mekan Sahibi Misiniz?</span>
+      <input type="checkbox" formControlName="isWeddingPlaceOwner" class="checkbox checkbox-secondary" />
+    </label>
   </div>
   <div class="mb-10 pt-1 pb-1 text-center">
     <button class="btn btn-primary mx-auto mb-3 w-full">Üye ol</button>

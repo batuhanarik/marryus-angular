@@ -15,7 +15,14 @@ const routes: Routes = [
         path:'',
         pathMatch:'full',
         component:HomeComponent
-      }
+      },
+      {
+        path: 'weddingplaces',
+        component:WeddingPlacesComponent,
+        children:[
+          {path:'', component:WeddingPlacesComponent}
+        ]
+      },
     ]
   },
   {
@@ -23,13 +30,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
-  {
-    path: 'weddingplaces',
-    component:WeddingPlacesComponent,
-    children:[
-      {path:'', component:WeddingPlacesComponent}
-    ]
-  },
+  
   {
     path: '**',
     redirectTo: '/',

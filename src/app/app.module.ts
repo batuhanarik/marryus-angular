@@ -1,4 +1,4 @@
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import tr from '@angular/common/locales/tr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -25,6 +25,8 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { FooterComponent } from './components/footer/footer.component';
 import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
 import { SearchWeddingplaceComponent } from './components/wedding-places/search-weddingplace/search-weddingplace.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { WeddingPlaceItemComponent } from './components/wedding-places/wedding-place-item/wedding-place-item.component';
 
 
 registerLocaleData(tr);
@@ -39,8 +41,11 @@ const ngZorroConfig: NzConfig = {
     FooterComponent,
     WeddingPlacesComponent,
     SearchWeddingplaceComponent,
+    FilterPipe,
+    WeddingPlaceItemComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,

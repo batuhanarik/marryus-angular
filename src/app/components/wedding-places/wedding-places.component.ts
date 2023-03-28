@@ -40,5 +40,4 @@ export class WeddingPlacesComponent {
       console.log(this.cities);
     });
   }
-
 }

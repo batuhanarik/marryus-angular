@@ -1,18 +1,34 @@
-<div class="flex flex-wrap justify-center">
-    <div class="h-64 w-full ">
-        <!-- <app-search-weddingplace/> -->
+<div class="flex flex-row flex-wrap justify-center">
+    <div class="h-64 w-full flex flex-row">
+        <div
+  class="container w-full flex flex-row justify-start items-start mx-auto flex-wrap"
+>
+  <ul
+    class="menu flex flex-row bg-base-100 min-h-52 max-h-56 w-44 max-w-44 h-56 p-2 rounded-box overflow-y-scroll overflow-x-hidden"
+  >
+    <li class="menu-title">
+      <span class="text-center">Şehirler</span>
+    </li>
+    <li class="text-amber-600"><a>Tüm Şehirler</a></li>
+    <li class="w-full" *ngFor="let city of cities">
+      <span>{{ city.plateName }}</span>
+    </li>
+  </ul>
+  <div class="flex flex-row justify-center my-2 items-center w-1/2">
+    <label class="label-text mx-1 self-center">Mekan İsmi :</label>
+    <input
+      type="text"
+      [(ngModel)]="filterText"
+      placeholder="Örn : Carmen Wedding House"
+      class="input input-bordered input-md w-full max-w-xs"
+    />
+  </div>
+
+ 
+</div>
     </div>
-  
-    <div class="card w-96 glass justify-items-stretch mx-auto my-1" *ngFor="let item of weddingPlaces">
-      <figure><img src="/assets/images/wedding_1.jpeg" alt="car!"/></figure>
-      <div class="card-body">
-        <h2 class="text-center font-bold italic text-xl">{{item.placeName}}</h2>
-        <p>{{item.plateName}}</p>
-        <div class="card-actions justify-end">
-          <button class="btn btn-primary">Learn now!</button>
-        </div>
-      </div>
-    </div>
+    <app-wedding-place-item [weddingPlace]="weddingPlace" *ngFor="let weddingPlace of weddingPlaces | filterpipe : filterText"/>
+   
     <progress *ngIf="loading" class="progress w-56"></progress>
     
    </div>
