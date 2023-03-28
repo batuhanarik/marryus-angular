@@ -22,6 +22,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AuthComponent } from './components/auth/auth.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
+import { SearchWeddingplaceComponent } from './components/wedding-places/search-weddingplace/search-weddingplace.component';
 
 
 registerLocaleData(tr);
@@ -33,6 +36,9 @@ const ngZorroConfig: NzConfig = {
     AppComponent,
     PrimaryLayoutComponent,
     HomeComponent,
+    FooterComponent,
+    WeddingPlacesComponent,
+    SearchWeddingplaceComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,9 +47,8 @@ const ngZorroConfig: NzConfig = {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NzIconModule,
     SweetAlert2Module.forRoot(),
-    NzIconModule
-
   ],
     providers: [
       { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

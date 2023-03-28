@@ -1,0 +1,18 @@
+<div class="flex flex-wrap justify-center">
+    <div class="h-64 w-full ">
+        <!-- <app-search-weddingplace/> -->
+    </div>
+  
+    <div class="card w-96 glass justify-items-stretch mx-auto my-1" *ngFor="let item of weddingPlaces">
+      <figure><img src="/assets/images/wedding_1.jpeg" alt="car!"/></figure>
+      <div class="card-body">
+        <h2 class="text-center font-bold italic text-xl">{{item.placeName}}</h2>
+        <p>{{item.plateName}}</p>
+        <div class="card-actions justify-end">
+          <button class="btn btn-primary">Learn now!</button>
+        </div>
+      </div>
+    </div>
+    <progress *ngIf="loading" class="progress w-56"></progress>
+    
+   </div>
