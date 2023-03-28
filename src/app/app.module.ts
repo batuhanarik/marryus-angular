@@ -16,6 +16,12 @@ import { ENVIRONMENT } from './tokens/environment.token';
 import { environment } from 'src/environments/environment.development';
 import { NZ_I18N, tr_TR } from 'ng-zorro-antd/i18n';
 import { NZ_CONFIG } from 'ng-zorro-antd/core/config';
+import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-layout.component';
+import { HomeComponent } from './components/home/home.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { AuthComponent } from './components/auth/auth.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 
 registerLocaleData(tr);
@@ -24,7 +30,9 @@ const ngZorroConfig: NzConfig = {
 };
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrimaryLayoutComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +42,8 @@ const ngZorroConfig: NzConfig = {
     FormsModule,
     ReactiveFormsModule,
     SweetAlert2Module.forRoot(),
+    NzIconModule
+
   ],
     providers: [
       { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
