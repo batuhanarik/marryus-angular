@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { RegisterInput } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,17 +18,16 @@ import Swal from 'sweetalert2';
 export class RegisterComponent {
   loading: boolean = false;
   isWeddingPlaceOwner:boolean=false;
-  isWeddingPlaceOwnerControl = new FormControl(this.isWeddingPlaceOwner);
   form = this._fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required,Validators.minLength(4)]],
     firstName: ['', [Validators.required,Validators.minLength(3)]],
     lastName: ['', [Validators.required,Validators.minLength(2)]],
     phoneNumber: ['', [Validators.required]],
-    isWeddingPlaceOwner: [new FormControl(false), [Validators.required]],
+    isWeddingPlaceOwner: [this.isWeddingPlaceOwner, [Validators.required]],
 
   });
-  constructor(private _fb: FormBuilder, private _service: AuthService){
+  constructor(private _fb: FormBuilder, private _service: AuthService,private router:Router){
   }
 
   submit() {
@@ -37,7 +37,6 @@ export class RegisterComponent {
     this.loading=true;
     this._service
     .register(this.form.value as RegisterInput)
-    
     .pipe(
       catchError(() => {
         Swal.fire({
@@ -60,6 +59,8 @@ export class RegisterComponent {
           timer: 1500
         }).finally(() => {
           this.loading=false;
+          this.form.reset();
+          this.router.navigateByUrl('/auth/login');
         })
       }
     });
