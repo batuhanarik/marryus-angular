@@ -58,45 +58,13 @@
         class="drawer-overlay !bg-white opacity-100"
       ></label>
       <ul class="bg-base-100 text-base-content w-[90px] py-2">
+       
+  
+     
         <li>
           <div
             class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['/']"
-            [routerLinkActive]="'border-l-primary text-primary'"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span
-              class="text-xl"
-              nz-icon
-              nzType="dashboard"
-              nzTheme="outline"
-            ></span>
-  
-            <span class="mt-2 text-xs"> Anasayfa </span>
-          </div>
-        </li>
-  
-        <li>
-          <div
-            class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['weddingplaces']"
-            [routerLinkActive]="'border-l-primary text-primary'"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span
-              class="text-xl"
-              nz-icon
-              nzType="home"
-              nzTheme="outline"
-            ></span>
-  
-            <button class="mt-2 text-xs"> Düğün Yerleri </button>
-          </div>
-        </li>
-        <li>
-          <div
-            class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['admin']"
+            [routerLink]="['/admin']"
             [routerLinkActive]="'border-l-primary text-primary'"
             [routerLinkActiveOptions]="{ exact: true }"
           >
@@ -110,6 +78,58 @@
             <button class="mt-2 text-xs">Yönetim Paneli</button>
           </div>
         </li>
+
+        <li>
+            <div
+              class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+              [routerLink]="['/admin/add']"
+              [routerLinkActive]="'border-l-primary text-primary'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <span
+                class="text-xl"
+                nz-icon
+                nzType="file-add"
+                nzTheme="outline"
+              ></span>
+    
+              <button class="mt-2 text-xs">Mekan Ekle</button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+              [routerLink]="['admin']"
+              [routerLinkActive]="'border-l-primary text-primary'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <span
+                class="text-xl"
+                nz-icon
+                nzType="undo"
+                nzTheme="outline"
+              ></span>
+    
+              <button class="mt-2 text-xs">Mekan Güncelle</button>
+            </div>
+          </li>
+          <li>
+            <div
+              class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+              [routerLink]="['admin']"
+              [routerLinkActive]="'border-l-primary text-primary'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <span
+                class="text-xl"
+                nz-icon
+                nzType="delete"
+                nzTheme="outline"
+              ></span>
+    
+              <button class="mt-2 text-xs">Mekan Sil</button>
+            </div>
+          </li>
       </ul>
     </div>
   </div>

@@ -9,10 +9,9 @@ import { ListResponseModel } from '../models/listResponseModel';
   providedIn: 'root',
 })
 export class CategoryService {
-  apiUrl: string = environment.apiUrl;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private _http: HttpClient) {}
 
   getCategories() : Observable<ListResponseModel<Category>> {
-    return this.httpClient.get<ListResponseModel<Category>>(this.apiUrl);
+    return this._http.get<ListResponseModel<Category>>('/Categories/getall');
   }
 }

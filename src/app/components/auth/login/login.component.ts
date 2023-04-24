@@ -30,7 +30,8 @@ export class LoginComponent {
     this._service
       .login(this.form.value as LoginInput)
       .pipe(
-        catchError(() => {
+        catchError((err) => {
+          console.log(err.error.detail)
           Swal.fire({
             position: 'bottom-end',
             icon: 'error',

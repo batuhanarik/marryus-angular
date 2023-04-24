@@ -4,6 +4,9 @@ import { HomeComponent } from './components/home/home.component';
 import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-layout.component';
+import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
+import { HomeAdminComponent } from './components/home-admin/home-admin.component';
+import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/add-weddingplace.component';
 
 const routes: Routes = [
   {
@@ -29,6 +32,14 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./components/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+  },
+  {
+    path:'admin',
+    component:AdminLayoutComponent,
+    children: [
+      {path:'',component:HomeAdminComponent},
+      {path:'add',component:AddWeddingplaceComponent}
+    ]
   },
   
   {

@@ -27,6 +27,9 @@ import { WeddingPlacesComponent } from './components/wedding-places/wedding-plac
 import { SearchWeddingplaceComponent } from './components/wedding-places/search-weddingplace/search-weddingplace.component';
 import { FilterPipe } from './pipes/filter.pipe';
 import { WeddingPlaceItemComponent } from './components/wedding-places/wedding-place-item/wedding-place-item.component';
+import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
+import { HomeAdminComponent } from './components/home-admin/home-admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 registerLocaleData(tr);
@@ -42,11 +45,14 @@ const ngZorroConfig: NzConfig = {
     WeddingPlacesComponent,
     SearchWeddingplaceComponent,
     FilterPipe,
-    WeddingPlaceItemComponent
+    WeddingPlaceItemComponent,
+    AdminLayoutComponent,
+    HomeAdminComponent,
   ],
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
