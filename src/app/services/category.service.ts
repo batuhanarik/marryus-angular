@@ -11,7 +11,14 @@ import { ListResponseModel } from '../models/listResponseModel';
 export class CategoryService {
   constructor(private _http: HttpClient) {}
 
-  getCategories() : Observable<ListResponseModel<Category>> {
+  getCategories(): Observable<ListResponseModel<Category>> {
     return this._http.get<ListResponseModel<Category>>('/Categories/getall');
+  }
+
+  addCategory(category: Category): Observable<ListResponseModel<Category>> {
+    return this._http.post<ListResponseModel<Category>>(
+      '/Categories/add',
+      category
+    );
   }
 }

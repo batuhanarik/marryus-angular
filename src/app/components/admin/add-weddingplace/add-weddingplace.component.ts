@@ -1,15 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
-  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
+  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { ToastrService } from 'ngx-toastr';
 import { City } from 'src/app/models/City';
 import { Category } from 'src/app/models/category';
 import { WeddingPlace } from 'src/app/models/weddingPlace';
@@ -17,17 +21,24 @@ import { CategoryService } from 'src/app/services/category.service';
 import { CityService } from 'src/app/services/city.service';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
 import Swal from 'sweetalert2';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @Component({
   selector: 'app-add-weddingplace',
   templateUrl: './add-weddingplace.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NzAlertModule],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NzAlertModule,
+    FileUploadModule,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddWeddingplaceComponent {
-  isFoodIncluded:boolean=false;
-  isAlcoholIncluded:boolean=false;
+  isFoodIncluded: boolean = false;
+  isAlcoholIncluded: boolean = false;
   weddingPlaceForm = this._formBuilder.nonNullable.group({
     plateCode: [1, Validators.required],
     categoryId: [1, Validators.required],
@@ -46,24 +57,27 @@ export class AddWeddingplaceComponent {
   });
   cities: City[] = [];
   categories: Category[] = [];
-  imageUrl: any = '';
-  loading:boolean=false;
+  categoriesLoaded: boolean = false;
 
+  images: any[] = [];
+  loading: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
     private weddingPlaceService: WeddingplaceService,
     private cityService: CityService,
     private categoryService: CategoryService,
-    private wpService:WeddingplaceService,
-    private router:Router
+    private wpService: WeddingplaceService,
+    private router: Router,
+    private cdrRef: ChangeDetectorRef,
+    private toastrService: ToastrService
   ) {}
-  
+
   ngOnInit() {
     this.getCities();
     this.getCategories();
   }
-  resetForm(){
+  resetForm() {
     this.weddingPlaceForm.reset();
   }
 
@@ -75,47 +89,51 @@ export class AddWeddingplaceComponent {
 
   getCategories() {
     this.categoryService.getCategories().subscribe((res) => {
-      this.categories=res.data;
-    })
-  }
-
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e: ProgressEvent) => {
-      this.imageUrl = (<FileReader>e.target).result?.toString();
-    };
-    reader.readAsDataURL(file);
-  }
-
-  onUpload() {
-    const formData = new FormData();
-    formData.append('image', this.imageUrl);
-
-    this.weddingPlaceService.addWeddingPlaceImage(formData).subscribe((res) => {
-      console.log(res.data);
+      this.categories = res.data;
+      this.cdrRef.detectChanges();
     });
+  }
+
+  setImages(event: any) {
+    this.images = [];
+    for (let file of event.files) {
+      this.images.push(file);
+    }
+    let plural = this.images.length > 1 ? 's' : '';
+    this.toastrService.success(`${this.images.length} file${plural} selected`);
   }
 
   submit() {
     if (this.weddingPlaceForm.invalid) {
       return;
     }
-    this.wpService.addWeddingPlace(this.weddingPlaceForm.value as unknown as WeddingPlace).subscribe(res=>{
-      console.log(res.data);
-      Swal.fire({
-        position: 'bottom-end',
-        icon: 'success',
-        title: `Mekan başarıyla eklendi!`,
-        showConfirmButton: false,
-        timer: 1500
-      }).then(()=>{
-        this.router.navigate(['/admin']);
-      })
-      
-    })
-
-    // this._service.login(this.form.value as LoginInput).subscribe();
+    this.wpService
+      .addWeddingPlace(this.weddingPlaceForm.value as unknown as WeddingPlace)
+      .subscribe((res) => {
+        Swal.fire({
+          position: 'bottom-end',
+          icon: 'success',
+          title: `Mekan başarıyla eklendi!`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+          if (this.images) {
+            this.weddingPlaceService
+              .addWeddingPlaceImages(this.images, res.data)
+              .subscribe((imgRes) => {
+                console.log(res.data)
+                if (imgRes.success) {
+                  this.toastrService.success(imgRes.message);
+                  this.weddingPlaceForm.reset();
+                  this.images = [];
+                } else {
+                  this.toastrService.error(
+                    imgRes.message,
+                    'Resimler yüklenirken bir hata oluştu...'
+                  );
+                }
+              });
+          }
+        });
   }
 }

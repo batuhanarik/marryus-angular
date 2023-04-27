@@ -7,6 +7,7 @@ import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-l
 import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/add-weddingplace.component';
+import { AddPhotoWeddingplaceComponent } from './components/admin/add-photo-weddingplace/add-photo-weddingplace.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     component:AdminLayoutComponent,
     children: [
       {path:'',component:HomeAdminComponent},
-      {path:'add',component:AddWeddingplaceComponent}
+      {path:'add',component:AddWeddingplaceComponent},
+      {path:'addphoto',component:AddPhotoWeddingplaceComponent},
     ]
   },
   

@@ -6,6 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NzConfig } from 'ng-zorro-antd/core/config';
+import { TableModule } from 'primeng/table';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,9 +22,6 @@ import { NZ_CONFIG } from 'ng-zorro-antd/core/config';
 import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { AuthComponent } from './components/auth/auth.component';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
 import { SearchWeddingplaceComponent } from './components/wedding-places/search-weddingplace/search-weddingplace.component';
@@ -30,7 +30,9 @@ import { WeddingPlaceItemComponent } from './components/wedding-places/wedding-p
 import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { AddPhotoWeddingplaceComponent } from './components/admin/add-photo-weddingplace/add-photo-weddingplace.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ApiImagePipe } from './pipes/api-image.pipe';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -48,6 +50,8 @@ const ngZorroConfig: NzConfig = {
     WeddingPlaceItemComponent,
     AdminLayoutComponent,
     HomeAdminComponent,
+    AddPhotoWeddingplaceComponent,
+    ApiImagePipe,
   ],
   imports: [
     CommonModule,
@@ -60,14 +64,20 @@ const ngZorroConfig: NzConfig = {
     ReactiveFormsModule,
     NzIconModule,
     SweetAlert2Module.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    }),
+    TableModule,
+    DynamicDialogModule,
+    ConfirmDialogModule,
   ],
-    providers: [
-      { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
-      { provide: ENVIRONMENT, useValue: environment },
-      { provide: NZ_I18N, useValue: tr_TR },
-      { provide: NZ_CONFIG, useValue: ngZorroConfig },
-      { provide: LOCALE_ID, useValue: 'tr' },
-    ],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    { provide: ENVIRONMENT, useValue: environment },
+    { provide: NZ_I18N, useValue: tr_TR },
+    { provide: NZ_CONFIG, useValue: ngZorroConfig },
+    { provide: LOCALE_ID, useValue: 'tr' },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

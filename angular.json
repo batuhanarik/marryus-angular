@@ -31,7 +31,11 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/ng-zorro-antd.less"
+              "src/ng-zorro-antd.less",
+              "./node_modules/ngx-toastr/toastr.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": []
           },

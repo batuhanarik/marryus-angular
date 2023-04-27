@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mx-auto">
   <div class="alert shadow-lg my-3">
     <div>
       <svg
@@ -17,9 +17,122 @@
       <div>
         <h3 class="font-bold">Marry Us:</h3>
         <div class="text-lg">
-          Marry Us'a Yönetim Paneline Hoşgeldiniz! Burada işletmenizi websitemize ekleyebilir, varolan mekanı güncelleyebilir ya da ilanlardan kaldırabilirsiniz.
+          Marry Us'a Yönetim Paneline Hoşgeldiniz! Burada işletmenizi
+          websitemize ekleyebilir, varolan mekanı güncelleyebilir ya da
+          ilanlardan kaldırabilirsiniz.
         </div>
       </div>
     </div>
   </div>
+  <p-table
+    [value]="weddingPlaces"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [loading]="!wpLoaded"
+    responsiveLayout="scroll"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [filterDelay]="0"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <div class="flex justify-content-between align-items-center">
+            Resim
+          </div>
+        </th>
+        <th pSortableColumn="weddingPlaceName">
+          <div class="flex justify-content-between align-items-center">
+            Mekan Adı
+            <p-sortIcon field="category"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="weddingPlaceName"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="categoryName">
+          <div class="flex justify-content-between align-items-center">
+            Kategori
+            <p-sortIcon field="category"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="category"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+        <th pSortableColumn="province">
+          <div class="flex justify-content-between align-items-center">
+            İl
+            <p-sortIcon field="province"></p-sortIcon>
+            <p-columnFilter
+              type="text"
+              field="province"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-weddingPlace>
+      <tr class="p-row">
+        <td>
+          <img
+            [alt]="weddingPlace.weddingPlaceName"
+            src="{{ weddingPlace.weddingPlaceImages[0].imagePath | apiImage }}"
+            width="64"
+            style="vertical-align: middle"
+          />
+        </td>
+        <td>
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex align-items-center">
+              <span class="ml-1">{{ weddingPlace.weddingPlaceName }}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex align-items-center">
+              <span class="ml-1">{{ weddingPlace.categoryName }}</span>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex align-items-center">
+              <span class="ml-1">{{ weddingPlace.province }}</span>
+            </div>
+          </div>
+        </td>
+
+        <td>
+          <div class="flex justify-content-between align-items-center">
+            <div class="flex align-items-center">
+              <p-confirmDialog
+                [style]="{ width: '50vw' }"
+                [baseZIndex]="10000"
+                key="{{ weddingPlace.weddingPlaceId }}"
+              ></p-confirmDialog>
+              <!-- <button pButton label="Edit" class="p-button-rounded p-button-sm" (click)="editCar(car)"></button>
+            <button pButton label="Delete" class="p-button-rounded p-button-danger p-button-sm" (click)="deleteCar(car)"></button>
+            <button pButton label="Stats" class="p-button-rounded p-button-sm" (click)="getCarStats(car)"></button> -->
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="8">Düğün yeri bulunamadı..</td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
