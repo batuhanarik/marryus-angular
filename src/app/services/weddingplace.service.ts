@@ -22,6 +22,14 @@ export class WeddingplaceService {
     );
   }
 
+  getWeddingPlaceById(
+    id: number
+  ): Observable<ObjectResponseModel<WeddingPlace>> {
+    return this._http.get<ObjectResponseModel<WeddingPlace>>(
+      this.weddingPlacesUrl + '/getbyid?id=' + id
+    );
+  }
+
   getWeddingPlaceDetails(): Observable<
     ListResponseModel<WeddingPlaceDetailDto>
   > {
@@ -30,16 +38,24 @@ export class WeddingplaceService {
     );
   }
 
+  getWeddingPlaceDetailsByCity(
+    id: number
+  ): Observable<ListResponseModel<WeddingPlaceDetailDto>> {
+    return this._http.get<ListResponseModel<WeddingPlaceDetailDto>>(
+      this.weddingPlacesUrl + '/getdetailsbycity?id=' + id
+    );
+  }
+
   getWeddingPlaceImages(): Observable<ListResponseModel<WeddingPlaceImage>> {
     return this._http.get<ListResponseModel<WeddingPlaceImage>>(
       this.weddingPlaceImagesUrl + '/getall'
     );
   }
-  getWeddingPlaceImagesById(): Observable<
-    ListResponseModel<WeddingPlaceImage>
-  > {
+  getWeddingPlaceImagesById(
+    id: number
+  ): Observable<ListResponseModel<WeddingPlaceImage>> {
     return this._http.get<ListResponseModel<WeddingPlaceImage>>(
-      this.weddingPlaceImagesUrl + '/getimagesbywpid'
+      this.weddingPlaceImagesUrl + '/getimagesbyweddingplaceid?id=' + id
     );
   }
   addWeddingPlace(
@@ -62,6 +78,13 @@ export class WeddingplaceService {
     return this._http.post<ResponseModel>(
       this.weddingPlaceImagesUrl + '/AddMultiple',
       formData
+    );
+  }
+
+  deleteWeddingPlaceImage(id: number): Observable<ResponseModel> {
+    return this._http.post<ResponseModel>(
+      this.weddingPlaceImagesUrl + 'delete',
+      { id: id }
     );
   }
 }

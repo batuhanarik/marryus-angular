@@ -1,116 +1,125 @@
-
 <!-- navbar -->
 <div class="navbar bg-[#ffd0cb] shadow-md">
-    <div class="flex-none">
-      <button
-        class="btn btn-square btn-ghost text-white"
-        (click)="isSidebarVisible = !isSidebarVisible"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="inline-block h-6 w-6 stroke-current"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
-    </div>
-    <div class="flex-1">
-      <a class="ml-3 text-xl normal-case" [routerLink]="'/'"
-        ><img class="w-36 h-auto" src="/assets/images/logo_mu.png" alt="logo"
-      /></a>
-    </div>
-    <div class="flex-none">
-      <button class="btn btn-square btn-ghost text-white">
-        <div class="avatar placeholder">
-          <div class="text-neutral-content w-10 rounded-full bg-slate-400">
-            <span>BA</span>
-          </div>
-        </div>
-      </button>
-    </div>
-  </div>
-  
-  <div class="drawer" [class.drawer-mobile]="isSidebarVisible">
-    <input
-      id="primary-drawer"
-      type="checkbox"
-      class="drawer-toggle"
-      [checked]="isSidebarVisible"
-    />
-    <div class="drawer-content overflow-y-clip">
-      <div class="min-h-screen bg-gray-100 p-4">
-        <router-outlet />
-      </div>
-    </div>
-    <div
-      class="drawer-side w-[90px] bg-white"
-      [class.shadow-md]="isSidebarVisible"
+  <div class="flex-none">
+    <button
+      class="btn btn-square btn-ghost text-white"
+      (click)="isSidebarVisible = !isSidebarVisible"
     >
-      <label
-        for="primary-drawer"
-        class="drawer-overlay !bg-white opacity-100"
-      ></label>
-      <ul class="bg-base-100 text-base-content w-[90px] py-2">
-        <li>
-          <div
-            class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['/']"
-            [routerLinkActive]="'border-l-primary text-primary'"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span
-              class="text-xl"
-              nz-icon
-              nzType="dashboard"
-              nzTheme="outline"
-            ></span>
-  
-            <span class="mt-2 text-xs"> Anasayfa </span>
-          </div>
-        </li>
-  
-        <li>
-          <div
-            class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['weddingplaces']"
-            [routerLinkActive]="'border-l-primary text-primary'"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span
-              class="text-xl"
-              nz-icon
-              nzType="home"
-              nzTheme="outline"
-            ></span>
-  
-            <button class="mt-2 text-xs"> Düğün Yerleri </button>
-          </div>
-        </li>
-        <li>
-          <div
-            class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-            [routerLink]="['admin']"
-            [routerLinkActive]="'border-l-primary text-primary'"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span
-              class="text-xl"
-              nz-icon
-              nzType="area-chart"
-              nzTheme="outline"
-            ></span>
-  
-            <button class="mt-2 text-xs">Yönetim Paneli</button>
-          </div>
-        </li>
-      </ul>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block h-6 w-6 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </button>
+  </div>
+  <div class="flex-1">
+    <a class="ml-3 text-xl normal-case" [routerLink]="'/'"
+      ><img class="w-20 h-16" src="/assets/images/marryus.png" alt="logo"
+    /></a>
+  </div>
+  <!-- <div class="flex-none">
+    <button class="btn btn-square btn-ghost text-white">
+      <div class="avatar placeholder">
+        <div class="text-neutral-content w-10 rounded-full bg-slate-400">
+          <span>BA</span>
+        </div>
+      </div>
+    </button>
+  </div> -->
+
+  <div class="dropdown dropdown-left dropdown-bottom dropdown-hover">
+    <label tabindex="0" class="btn m-1">{{ fullName }}</label>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu !right-0 p-2 shadow bg-base-100 rounded-box w-36 overflow-hidden"
+    >
+      <li>
+        <a [routerLink]="['/profile']" routerLinkActive="router-link-active"
+          >Profil</a
+        >
+      </li>
+      <li (click)="logout()"><a>Çıkış Yap</a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="drawer" [class.drawer-mobile]="isSidebarVisible">
+  <input
+    id="primary-drawer"
+    type="checkbox"
+    class="drawer-toggle"
+    [checked]="isSidebarVisible"
+  />
+  <div class="drawer-content overflow-y-clip">
+    <div class="min-h-screen bg-gray-100 p-4">
+      <router-outlet />
     </div>
   </div>
-  <app-footer />
+  <div
+    class="drawer-side w-[90px] bg-white"
+    [class.shadow-md]="isSidebarVisible"
+  >
+    <label
+      for="primary-drawer"
+      class="drawer-overlay !bg-white opacity-100"
+    ></label>
+    <ul class="bg-base-100 text-base-content w-[90px] py-2">
+      <li>
+        <div
+          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+          [routerLink]="['/']"
+          [routerLinkActive]="'border-l-primary text-primary'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span
+            class="text-xl"
+            nz-icon
+            nzType="dashboard"
+            nzTheme="outline"
+          ></span>
+
+          <span class="mt-2 text-xs"> Anasayfa </span>
+        </div>
+      </li>
+
+      <li>
+        <div
+          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+          [routerLink]="['weddingplaces']"
+          [routerLinkActive]="'border-l-primary text-primary'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="text-xl" nz-icon nzType="home" nzTheme="outline"></span>
+
+          <button class="mt-2 text-xs">Düğün Yerleri</button>
+        </div>
+      </li>
+      <li>
+        <div
+          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+          [routerLink]="['admin']"
+          [routerLinkActive]="'border-l-primary text-primary'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span
+            class="text-xl"
+            nz-icon
+            nzType="area-chart"
+            nzTheme="outline"
+          ></span>
+
+          <button class="mt-2 text-xs">Yönetim Paneli</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<app-footer />

@@ -109,31 +109,25 @@ export class AddWeddingplaceComponent {
     }
     this.wpService
       .addWeddingPlace(this.weddingPlaceForm.value as unknown as WeddingPlace)
-      .subscribe((res) => {
-        Swal.fire({
-          position: 'bottom-end',
-          icon: 'success',
-          title: `Mekan başarıyla eklendi!`,
-          showConfirmButton: false,
-          timer: 1500,
-        })
-          if (this.images) {
-            this.weddingPlaceService
-              .addWeddingPlaceImages(this.images, res.data)
-              .subscribe((imgRes) => {
-                console.log(res.data)
-                if (imgRes.success) {
-                  this.toastrService.success(imgRes.message);
-                  this.weddingPlaceForm.reset();
-                  this.images = [];
-                } else {
-                  this.toastrService.error(
-                    imgRes.message,
-                    'Resimler yüklenirken bir hata oluştu...'
-                  );
-                }
-              });
-          }
-        });
+      .subscribe((res: any) => {
+        this.toastrService.success(res.message);
+        if (this.images) {
+          this.weddingPlaceService
+            .addWeddingPlaceImages(this.images, res.data)
+            .subscribe((imgRes) => {
+              console.log(res.data);
+              if (imgRes.success) {
+                this.toastrService.success(imgRes.message);
+                this.weddingPlaceForm.reset();
+                this.images = [];
+              } else {
+                this.toastrService.error(
+                  imgRes.message,
+                  'Resimler yüklenirken bir hata oluştu...'
+                );
+              }
+            });
+        }
+      });
   }
 }

@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { LoginInput } from 'src/app/models/auth.model';
@@ -10,8 +15,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  standalone: true,  
-  imports:[CommonModule,FormsModule,ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [AuthService],
 })
@@ -31,28 +36,27 @@ export class LoginComponent {
       .login(this.form.value as LoginInput)
       .pipe(
         catchError((err) => {
-          console.log(err.error.detail)
+          console.log(err.error.detail);
           Swal.fire({
             position: 'bottom-end',
             icon: 'error',
             title: `Hatalı İstek`,
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
           return of();
-        }),
+        })
       )
-      .subscribe((res:any)=>{
-        if (res.token!==null) {
+      .subscribe((res: any) => {
+        if (res.token !== null) {
           Swal.fire({
             position: 'bottom-end',
             icon: 'success',
             title: `Giriş Başarılı!`,
             showConfirmButton: false,
-            timer: 1500
-          })
+            timer: 1500,
+          });
         }
       });
   }
-
 }

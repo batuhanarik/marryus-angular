@@ -30,9 +30,17 @@ import { WeddingPlaceItemComponent } from './components/wedding-places/wedding-p
 import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AddPhotoWeddingplaceComponent } from './components/admin/add-photo-weddingplace/add-photo-weddingplace.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiImagePipe } from './pipes/api-image.pipe';
+import { UpdateWeddingplaceComponent } from './components/admin/update-weddingplace/update-weddingplace.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CarouselModule } from 'primeng/carousel';
+import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CardModule } from 'primeng/card';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -50,8 +58,9 @@ const ngZorroConfig: NzConfig = {
     WeddingPlaceItemComponent,
     AdminLayoutComponent,
     HomeAdminComponent,
-    AddPhotoWeddingplaceComponent,
     ApiImagePipe,
+    UpdateWeddingplaceComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -70,6 +79,13 @@ const ngZorroConfig: NzConfig = {
     TableModule,
     DynamicDialogModule,
     ConfirmDialogModule,
+    CheckboxModule,
+    RadioButtonModule,
+    InputTextareaModule,
+    CarouselModule,
+    DropdownModule,
+    FileUploadModule,
+    CardModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

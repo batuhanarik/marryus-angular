@@ -5,6 +5,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WeddingPlaceDetailDto } from 'src/app/models/weddingPlaceDetailDto';
 import { ApiImagePipe } from 'src/app/pipes/api-image.pipe';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
+import { UpdateWeddingplaceComponent } from '../admin/update-weddingplace/update-weddingplace.component';
 
 @Component({
   selector: 'app-home-admin',
@@ -34,12 +35,20 @@ export class HomeAdminComponent {
       if (res.success) {
         this.weddingPlaces = res.data;
         this.wpLoaded = true;
-        console.log(
-          this.apiimagePipe.transform(
-            this.weddingPlaces[31].weddingPlaceImages[0].imagePath
-          )
-        );
       }
+    });
+  }
+
+  editWeddingPlace(weddingPlace: WeddingPlaceDetailDto) {
+    this.ref = this.dialogService.open(UpdateWeddingplaceComponent, {
+      header: 'Düğün Yeri Güncelle',
+      width: '70%',
+      contentStyle: { 'min-height': '300px', overflow: 'auto' },
+      data: weddingPlace,
+    });
+
+    this.ref.onClose.subscribe(() => {
+      this.getWeddingPlaces();
     });
   }
 }

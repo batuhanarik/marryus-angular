@@ -7,27 +7,29 @@ import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-l
 import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.component';
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/add-weddingplace.component';
-import { AddPhotoWeddingplaceComponent } from './components/admin/add-photo-weddingplace/add-photo-weddingplace.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:PrimaryLayoutComponent,
-    canActivate:[AuthGuard],
+    path: '',
+    component: PrimaryLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
-        path:'',
-        pathMatch:'full',
-        component:HomeComponent
+        path: '',
+        pathMatch: 'full',
+        component: HomeComponent,
       },
       {
         path: 'weddingplaces',
-        component:WeddingPlacesComponent,
-        children:[
-          {path:'', component:WeddingPlacesComponent}
-        ]
+        component: WeddingPlacesComponent,
+        children: [{ path: '', component: WeddingPlacesComponent }],
       },
-    ]
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+    ],
   },
   {
     path: 'auth',
@@ -35,15 +37,15 @@ const routes: Routes = [
       import('./components/auth/auth.routes').then((m) => m.AUTH_ROUTES),
   },
   {
-    path:'admin',
-    component:AdminLayoutComponent,
+    path: 'admin',
+    component: AdminLayoutComponent,
     children: [
-      {path:'',component:HomeAdminComponent},
-      {path:'add',component:AddWeddingplaceComponent},
-      {path:'addphoto',component:AddPhotoWeddingplaceComponent},
-    ]
+      { path: '', component: HomeAdminComponent },
+      { path: 'addweddingplace', component: AddWeddingplaceComponent },
+      { path: 'updateweddingplace', component: AddWeddingplaceComponent },
+    ],
   },
-  
+
   {
     path: '**',
     redirectTo: '/',
@@ -52,6 +54,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

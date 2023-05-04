@@ -1,5 +1,5 @@
 export interface WeddingPlace {
-  // weddingPlaceId: number;
+  weddingPlaceId: number;
   plateCode: number;
   categoryId: number;
   placeName: string;

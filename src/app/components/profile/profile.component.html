@@ -1,0 +1,62 @@
+<div class="flex flex-wrap flex-col">
+  <form [formGroup]="userUpdateForm">
+    <div class="card flex flex-column md:flex-row md:flex-wrap gap-3">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Email adresi</span>
+        </label>
+        <label class="input-group">
+          <span>Email</span>
+          <input
+            [disabled]="disabled"
+            type="text"
+            id="email"
+            placeholder="mail@gmail.com"
+            class="input input-bordered"
+          />
+        </label>
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Adınız</span>
+        </label>
+        <label class="input-group">
+          <span>Ad</span>
+          <input
+            type="text"
+            placeholder="Batuhan"
+            formControlName="firstName"
+            class="input input-bordered"
+          />
+        </label>
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Soyadınız</span>
+        </label>
+        <label class="input-group">
+          <span>Soyad</span>
+          <input
+            type="text"
+            placeholder="Arık"
+            formControlName="lastName"
+            class="input input-bordered"
+          />
+        </label>
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Your Email</span>
+        </label>
+        <label class="input-group">
+          <span>Email</span>
+          <input
+            type="text"
+            placeholder="info@site.com"
+            class="input input-bordered"
+          />
+        </label>
+      </div>
+    </div>
+  </form>
+</div>

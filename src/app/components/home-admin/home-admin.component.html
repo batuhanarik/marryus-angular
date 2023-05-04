@@ -78,6 +78,20 @@
             ></p-columnFilter>
           </div>
         </th>
+        <th>
+          <div class="flex justify-content-between align-items-center">
+            <button class="btn btn-active btn-secondary justify-around">
+              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <span>Mekan Ekle</span>
+            </button>
+            <p-columnFilter
+              type="text"
+              field="addweddingplace"
+              display="menu"
+              class="ml-auto"
+            ></p-columnFilter>
+          </div>
+        </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-weddingPlace>
@@ -121,9 +135,22 @@
                 [baseZIndex]="10000"
                 key="{{ weddingPlace.weddingPlaceId }}"
               ></p-confirmDialog>
-              <!-- <button pButton label="Edit" class="p-button-rounded p-button-sm" (click)="editCar(car)"></button>
-            <button pButton label="Delete" class="p-button-rounded p-button-danger p-button-sm" (click)="deleteCar(car)"></button>
-            <button pButton label="Stats" class="p-button-rounded p-button-sm" (click)="getCarStats(car)"></button> -->
+              <button
+                pButton
+                (click)="editWeddingPlace(weddingPlace)"
+                label="Edit"
+                class="p-button-rounded p-button-sm"
+              ></button>
+              <button
+                pButton
+                label="Delete"
+                class="p-button-rounded p-button-danger p-button-sm"
+              ></button>
+              <button
+                pButton
+                label="Stats"
+                class="p-button-rounded p-button-sm"
+              ></button>
             </div>
           </div>
         </td>

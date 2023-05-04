@@ -1,0 +1,143 @@
+<div *ngIf="imagesLoaded" class="mb-5">
+  <h4>Delete Images</h4>
+  <p-carousel
+    [value]="images"
+    [numVisible]="3"
+    [numScroll]="3"
+    [circular]="false"
+  >
+    <ng-template pTemplate="body" let-image>
+      <p-card>
+        <ng-template pTemplate="header">
+          <img
+            alt="Card"
+            src="{{ image.imagePath | apiImage }}"
+            style="height: 13vw; object-fit: cover"
+          />
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <div class="text-center">
+            <button
+              pButton
+              class="p-button-primary"
+              label="Delete"
+              (click)="deleteImage(image)"
+            ></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </ng-template>
+  </p-carousel>
+  <h5>Upload Images</h5>
+  <p-fileUpload
+    [customUpload]="true"
+    (uploadHandler)="uploadImages($event)"
+    [multiple]="true"
+    [maxFileSize]="1000000"
+    [fileLimit]="5"
+    accept="image/*"
+  >
+  </p-fileUpload>
+</div>
+
+<form [formGroup]="weddingPlaceUpdateForm" *ngIf="wpLoaded">
+  <h5 class="mb-3">Update Data</h5>
+  <div class="container">
+    <div class="row">
+      <div class="col-3 mt-2">
+        <h5>Brand</h5>
+        <p-dropdown
+          *ngIf="categoriesLoaded"
+          [options]="categories"
+          optionLabel="name"
+          optionValue="id"
+          formControlName="category"
+          [showClear]="true"
+          show
+          placeholder="Kategori Seçin"
+        ></p-dropdown>
+      </div>
+
+      <div class="col-4 mt-2">
+        <h5>Model Year</h5>
+        <span class="p-float-label mt-1">
+          <input class="p-inputtext" id="modelYear" type="number" pInputText />
+          <label for="modelYear">Model Year</label>
+        </span>
+      </div>
+
+      <div class="col-3 mt-2">
+        <h5>Color</h5>
+        <p-dropdown
+          *ngIf="citiesLoaded"
+          [options]="cities"
+          optionLabel="name"
+          optionValue="id"
+          [showClear]="true"
+          placeholder="Select a Color"
+        ></p-dropdown>
+      </div>
+
+      <div class="col-4 mt-2">
+        <h5>İlk Fiyat</h5>
+        <span class="p-float-label mt-1">
+          <input
+            class="p-inputtext"
+            id="priceFirst"
+            type="number"
+            formControlName="priceFirst"
+            pInputText
+          />
+          <label for="dailyPrice">İlk Fiyat</label>
+        </span>
+      </div>
+
+      <div class="col-4 mt-2">
+        <h5>Son Fiyat</h5>
+        <span class="p-float-label mt-1">
+          <input
+            class="p-inputtext"
+            id="priceFirst"
+            type="number"
+            formControlName="priceFirst"
+            pInputText
+          />
+          <label for="dailyPrice">Son Fiyat</label>
+        </span>
+      </div>
+
+      <div class="col-4 mt-2">
+        <h5>Findex Score</h5>
+        <span class="p-float-label mt-1">
+          <input
+            class="p-inputtext"
+            id="findexScore"
+            type="number"
+            pInputText
+          />
+          <label for="findexScore">Findex Score</label>
+        </span>
+      </div>
+    </div>
+    <div class="mt-4 text-center">
+      <h5>description</h5>
+      <textarea
+        rows="5"
+        cols="50"
+        pInputTextarea
+        [autoResize]="true"
+        formControlName="description"
+      ></textarea>
+    </div>
+  </div>
+  <div class="mt-4 text-center">
+    <button
+      pButton
+      [disabled]="weddingPlaceUpdateForm.invalid"
+      type="submit"
+      label="Update"
+      class="p-button-success"
+      (click)="updateWeddingPlace()"
+    ></button>
+  </div>
+</form>

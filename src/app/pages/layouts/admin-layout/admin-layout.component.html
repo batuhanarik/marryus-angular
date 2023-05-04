@@ -78,7 +78,7 @@
       <li>
         <div
           class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-          [routerLink]="['/admin/add']"
+          [routerLink]="['/admin/addweddingplace']"
           [routerLinkActive]="'border-l-primary text-primary'"
           [routerLinkActiveOptions]="{ exact: true }"
         >
@@ -95,32 +95,21 @@
       <li>
         <div
           class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-          [routerLink]="['/admin/addphoto']"
+          [routerLink]="['/admin/updateweddingplace']"
           [routerLinkActive]="'border-l-primary text-primary'"
           [routerLinkActiveOptions]="{ exact: true }"
         >
           <span
             class="text-xl"
             nz-icon
-            nzType="file-add"
+            nzType="appstore-add"
             nzTheme="outline"
           ></span>
-
-          <button class="mt-2 text-xs">Fotoğraf Ekle</button>
-        </div>
-      </li>
-      <li>
-        <div
-          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-          [routerLink]="['admin']"
-          [routerLinkActive]="'border-l-primary text-primary'"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <span class="text-xl" nz-icon nzType="undo" nzTheme="outline"></span>
 
           <button class="mt-2 text-xs">Mekan Güncelle</button>
         </div>
       </li>
+
       <li>
         <div
           class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
@@ -136,6 +125,23 @@
           ></span>
 
           <button class="mt-2 text-xs">Mekan Sil</button>
+        </div>
+      </li>
+      <li>
+        <div
+          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+          [routerLink]="['/']"
+          [routerLinkActive]="'border-l-primary text-primary'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span
+            class="text-xl"
+            nz-icon
+            nzType="backward"
+            nzTheme="outline"
+          ></span>
+
+          <button class="mt-2 text-xs">Anasayfaya Dön</button>
         </div>
       </li>
     </ul>

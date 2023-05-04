@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { City } from 'src/app/models/City';
 import { WeddingPlace } from 'src/app/models/weddingPlace';
+import { WeddingPlaceDetailDto } from 'src/app/models/weddingPlaceDetailDto';
 import { CityService } from 'src/app/services/city.service';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
 
@@ -9,14 +10,15 @@ import { WeddingplaceService } from 'src/app/services/weddingplace.service';
   templateUrl: './wedding-places.component.html',
 })
 export class WeddingPlacesComponent {
-  weddingPlaces: WeddingPlace[] = [];
+  weddingPlaces: WeddingPlaceDetailDto[] = [];
   cities: City[] = [];
   loading: boolean = false;
   filterText: string = '';
-  constructor( private weddingPlaceService: WeddingplaceService,
-    private cityService: CityService){}
+  constructor(
+    private weddingPlaceService: WeddingplaceService,
+    private cityService: CityService
+  ) {}
 
-    
   ngOnInit(): void {
     this.getWeddingPlaces();
     this.getCities();
@@ -24,16 +26,24 @@ export class WeddingPlacesComponent {
 
   getWeddingPlaces() {
     this.loading = true;
-    this.weddingPlaceService.getWeddingplaces().subscribe((res: any) => {
+    this.weddingPlaceService.getWeddingPlaceDetails().subscribe((res: any) => {
       this.weddingPlaces = res.data;
       console.log(this.weddingPlaces);
       this.loading = false;
     });
   }
 
-  getWeddingPlacePhotos() {
-    this.weddingPlaceService.getWeddingPlaceImagesById();
+  getWeddingPlaceDetailsByCity(id: number) {
+    this.loading = true;
+    this.weddingPlaceService
+      .getWeddingPlaceDetailsByCity(id)
+      .subscribe((res: any) => {
+        this.weddingPlaces = res.data;
+        this.loading = false;
+      });
+    console.log(id);
   }
+
   getCities() {
     this.cityService.getCities().subscribe((res: any) => {
       this.cities = res.data;
