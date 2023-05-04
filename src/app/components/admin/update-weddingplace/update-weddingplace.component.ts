@@ -40,6 +40,8 @@ export class UpdateWeddingplaceComponent {
 
   ngOnInit(): void {
     this.getWeddingPlace();
+    this.getCities();
+    this.getCategories();
   }
 
   getWeddingPlace() {
@@ -81,13 +83,13 @@ export class UpdateWeddingplaceComponent {
     this.weddingPlaceUpdateForm = this.formBuilder.group({
       weddingPlaceId: [this.weddingPlace.weddingPlaceId],
       plateCode: [this.weddingPlace.plateCode, Validators.required],
-      category: [this.weddingPlace.categoryId, Validators.required],
+      categoryId: [this.weddingPlace.categoryId, Validators.required],
       placeName: [this.weddingPlace.placeName, Validators.required],
       phoneNumber: [this.weddingPlace.phoneNumber, Validators.required],
       description: [this.weddingPlace.description, Validators.required],
       capacity: [this.weddingPlace.capacity, Validators.required],
       priceFirst: [this.weddingPlace.priceFirst, Validators.required],
-      priceLast: [this.weddingPlace.priceFirst, Validators.required],
+      priceLast: [this.weddingPlace.priceLast, Validators.required],
       discountRate: [this.weddingPlace.discountRate, Validators.required],
       isFoodIncluded: [this.weddingPlace.isFoodIncluded, Validators.required],
       isAlcoholIncluded: [
@@ -98,7 +100,15 @@ export class UpdateWeddingplaceComponent {
     });
   }
 
-  updateWeddingPlace() {}
+  updateWeddingPlace() {
+    this.weddingPlaceService
+      .updateWeddingPlace(this.weddingPlaceUpdateForm.value)
+      .subscribe((result) => {
+        if (result.success) {
+          this.toastrService.success(result.message);
+        }
+      });
+  }
 
   uploadImages(event: any) {
     let imagesToUpload = [];
@@ -117,7 +127,7 @@ export class UpdateWeddingplaceComponent {
 
   deleteImage(image: WeddingPlaceImage) {
     this.weddingPlaceService
-      .deleteWeddingPlaceImage(image.placePhotoId)
+      .deleteWeddingPlaceImage(image)
       .subscribe((result) => {
         if (result.success) {
           this.toastrService.success(result.message);

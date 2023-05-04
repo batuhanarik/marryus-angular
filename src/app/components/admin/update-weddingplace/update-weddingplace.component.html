@@ -1,10 +1,10 @@
 <div *ngIf="imagesLoaded" class="mb-5">
-  <h4>Delete Images</h4>
+  <h4>Resimleri Sil</h4>
   <p-carousel
     [value]="images"
     [numVisible]="3"
     [numScroll]="3"
-    [circular]="false"
+    [circular]="true"
   >
     <ng-template pTemplate="body" let-image>
       <p-card>
@@ -19,8 +19,8 @@
           <div class="text-center">
             <button
               pButton
-              class="p-button-primary"
-              label="Delete"
+              class="p-button-danger"
+              label="Sil"
               (click)="deleteImage(image)"
             ></button>
           </div>
@@ -28,7 +28,7 @@
       </p-card>
     </ng-template>
   </p-carousel>
-  <h5>Upload Images</h5>
+  <h5>Resim Yükle</h5>
   <p-fileUpload
     [customUpload]="true"
     (uploadHandler)="uploadImages($event)"
@@ -41,40 +41,32 @@
 </div>
 
 <form [formGroup]="weddingPlaceUpdateForm" *ngIf="wpLoaded">
-  <h5 class="mb-3">Update Data</h5>
   <div class="container">
     <div class="row">
       <div class="col-3 mt-2">
-        <h5>Brand</h5>
+        <h5>Kategori</h5>
         <p-dropdown
           *ngIf="categoriesLoaded"
           [options]="categories"
-          optionLabel="name"
-          optionValue="id"
-          formControlName="category"
+          optionLabel="categoryName"
+          optionValue="categoryId"
+          formControlName="categoryId"
           [showClear]="true"
           show
           placeholder="Kategori Seçin"
         ></p-dropdown>
       </div>
 
-      <div class="col-4 mt-2">
-        <h5>Model Year</h5>
-        <span class="p-float-label mt-1">
-          <input class="p-inputtext" id="modelYear" type="number" pInputText />
-          <label for="modelYear">Model Year</label>
-        </span>
-      </div>
-
       <div class="col-3 mt-2">
-        <h5>Color</h5>
+        <h5>Şehir</h5>
         <p-dropdown
+          formControlName="plateCode"
           *ngIf="citiesLoaded"
           [options]="cities"
-          optionLabel="name"
-          optionValue="id"
+          optionLabel="plateName"
+          optionValue="plateCode"
           [showClear]="true"
-          placeholder="Select a Color"
+          placeholder="Şehir Seçin"
         ></p-dropdown>
       </div>
 
@@ -85,10 +77,10 @@
             class="p-inputtext"
             id="priceFirst"
             type="number"
+            step="1000"
             formControlName="priceFirst"
             pInputText
           />
-          <label for="dailyPrice">İlk Fiyat</label>
         </span>
       </div>
 
@@ -97,33 +89,109 @@
         <span class="p-float-label mt-1">
           <input
             class="p-inputtext"
-            id="priceFirst"
+            id="priceLast"
             type="number"
-            formControlName="priceFirst"
+            step="1000"
+            formControlName="priceLast"
             pInputText
           />
-          <label for="dailyPrice">Son Fiyat</label>
-        </span>
-      </div>
-
-      <div class="col-4 mt-2">
-        <h5>Findex Score</h5>
-        <span class="p-float-label mt-1">
-          <input
-            class="p-inputtext"
-            id="findexScore"
-            type="number"
-            pInputText
-          />
-          <label for="findexScore">Findex Score</label>
         </span>
       </div>
     </div>
+    <!-- Maksimum Kapasiite -->
+    <div class="sm:col-span-3">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text font-semibold">Kapasite</span>
+        </label>
+        <label class="input-group">
+          <input
+            type="number"
+            formControlName="capacity"
+            placeholder="1200"
+            min:1
+            max:1500000
+            step="50"
+            class="input input-bordered"
+          />
+          <span>Kişi</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- İndirim Oranı -->
+    <div class="sm:col-span-3">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text font-semibold">İndirim Oranı</span>
+        </label>
+        <label class="input-group">
+          <input
+            type="number"
+            formControlName="discountRate"
+            placeholder="10"
+            min:0
+            max:100
+            step="1"
+            class="input input-bordered"
+          />
+          <span>%</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Telefon Numarası -->
+    <div class="sm:col-span-4">
+      <label
+        for="phoneNumber"
+        class="block text-sm font-medium leading-6 text-gray-900"
+        >Telefon Numarası</label
+      >
+      <div class="mt-2">
+        <input
+          type="text"
+          formControlName="phoneNumber"
+          name="phoneNumber"
+          id="phoneNumber"
+          autocomplete="false"
+          class="border-2 w-1/2 bg-white rounded-md py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          placeholder="Örn: 552 615 22 39"
+        />
+      </div>
+    </div>
+    <div class="w-full">
+      <!-- Alkol Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text"
+            >Düğün yerinde alkol satışı veya menülerde alkol var mı?</span
+          >
+          <input
+            type="checkbox"
+            formControlName="isAlcoholIncluded"
+            class="checkbox"
+          />
+        </label>
+      </div>
+      <!-- Yemek Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text"
+            >Düğün yerindeki menülerde yemek var mı?</span
+          >
+          <input
+            type="checkbox"
+            formControlName="isFoodIncluded"
+            class="checkbox"
+          />
+        </label>
+      </div>
+    </div>
     <div class="mt-4 text-center">
-      <h5>description</h5>
+      <h5>Açıklama</h5>
       <textarea
-        rows="5"
-        cols="50"
+        rows="8"
+        cols="70"
         pInputTextarea
         [autoResize]="true"
         formControlName="description"
@@ -135,7 +203,7 @@
       pButton
       [disabled]="weddingPlaceUpdateForm.invalid"
       type="submit"
-      label="Update"
+      label="Güncelle"
       class="p-button-success"
       (click)="updateWeddingPlace()"
     ></button>

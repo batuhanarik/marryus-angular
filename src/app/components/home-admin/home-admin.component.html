@@ -78,20 +78,7 @@
             ></p-columnFilter>
           </div>
         </th>
-        <th>
-          <div class="flex justify-content-between align-items-center">
-            <button class="btn btn-active btn-secondary justify-around">
-              <span nz-icon nzType="plus" nzTheme="outline"></span>
-              <span>Mekan Ekle</span>
-            </button>
-            <p-columnFilter
-              type="text"
-              field="addweddingplace"
-              display="menu"
-              class="ml-auto"
-            ></p-columnFilter>
-          </div>
-        </th>
+        <th class="!text-center">Aksiyonlar</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-weddingPlace>
@@ -105,14 +92,14 @@
           />
         </td>
         <td>
-          <div class="flex justify-content-between align-items-center">
+          <div class="flex justify-between items-center">
             <div class="flex align-items-center">
               <span class="ml-1">{{ weddingPlace.weddingPlaceName }}</span>
             </div>
           </div>
         </td>
         <td>
-          <div class="flex justify-content-between align-items-center">
+          <div class="flex justify-between items-center">
             <div class="flex align-items-center">
               <span class="ml-1">{{ weddingPlace.categoryName }}</span>
             </div>
@@ -120,7 +107,7 @@
         </td>
 
         <td>
-          <div class="flex justify-content-between align-items-center">
+          <div class="flex justify-between items-center">
             <div class="flex align-items-center">
               <span class="ml-1">{{ weddingPlace.province }}</span>
             </div>
@@ -128,8 +115,8 @@
         </td>
 
         <td>
-          <div class="flex justify-content-between align-items-center">
-            <div class="flex align-items-center">
+          <div class="flex justify-between items-center">
+            <div class="flex justify-around mx-auto">
               <p-confirmDialog
                 [style]="{ width: '50vw' }"
                 [baseZIndex]="10000"
@@ -138,18 +125,18 @@
               <button
                 pButton
                 (click)="editWeddingPlace(weddingPlace)"
-                label="Edit"
-                class="p-button-rounded p-button-sm"
+                label="Güncelle"
+                class="p-button-rounded p-button-help p-button-sm"
               ></button>
               <button
                 pButton
-                label="Delete"
-                class="p-button-rounded p-button-danger p-button-sm"
+                label="Sil"
+                class="p-button-rounded p-button-secondary p-button-sm"
               ></button>
               <button
                 pButton
-                label="Stats"
-                class="p-button-rounded p-button-sm"
+                label="İstatistik"
+                class="p-button-rounded p-button-success p-button-sm"
               ></button>
             </div>
           </div>

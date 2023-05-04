@@ -12,6 +12,12 @@ import { WeddingPlaceDetailDto } from '../models/weddingPlaceDetailDto';
   providedIn: 'root',
 })
 export class WeddingplaceService {
+  updateWeddingPlace(weddingPlace: WeddingPlace): Observable<ResponseModel> {
+    return this._http.post<ResponseModel>(
+      this.weddingPlacesUrl + '/update',
+      weddingPlace
+    );
+  }
   weddingPlacesUrl = '/WeddingPlaces';
   weddingPlaceImagesUrl = '/WeddingPlaceImages';
   constructor(private _http: HttpClient) {}
@@ -81,10 +87,10 @@ export class WeddingplaceService {
     );
   }
 
-  deleteWeddingPlaceImage(id: number): Observable<ResponseModel> {
+  deleteWeddingPlaceImage(image: WeddingPlaceImage): Observable<ResponseModel> {
     return this._http.post<ResponseModel>(
-      this.weddingPlaceImagesUrl + 'delete',
-      { id: id }
+      this.weddingPlaceImagesUrl + '/delete',
+      image
     );
   }
 }
