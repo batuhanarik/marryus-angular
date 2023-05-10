@@ -35,7 +35,6 @@ export class AuthService {
   }
   logout(): void {
     localStorage.setItem('auth', 'null');
-    console.log(this._authState.isAuthenticated());
     this._router.navigate(['/auth/login']);
   }
 
@@ -49,7 +48,6 @@ export class AuthService {
   }
   private getClaims() {
     let token = this.getToken();
-    console.log(token);
     let tokenAttributes = this.getTokenAttributes(token);
     if (tokenAttributes) {
       let claims: UserClaims = {
@@ -68,7 +66,6 @@ export class AuthService {
           ],
       };
       this.claims = claims;
-      console.log(this.claims);
     }
   }
 

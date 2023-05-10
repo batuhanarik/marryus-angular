@@ -1,0 +1,49 @@
+<div *ngIf="wpLoaded">
+  <div class="container">
+    <div class="flex flex-wrap">
+      <p-galleria
+        [value]="currentWeddingPlace.weddingPlaceImages"
+        [containerStyle]="{
+          'max-width': '540px',
+          'min-width': '480px'
+        }"
+        [numVisible]="5"
+        [circular]="true"
+        [autoPlay]="true"
+        [showItemNavigators]="true"
+        [showThumbnails]="false"
+        [showIndicators]="true"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img
+            [src]="item.imagePath | apiImage"
+            style="width: 100%; display: block; max-height: 35rem"
+          />
+        </ng-template>
+      </p-galleria>
+      <div class="flex-1 flex-row">
+        <h1 class="text-3xl text-center text-fuchsia-800">
+          {{ currentWeddingPlace.weddingPlaceName }}
+        </h1>
+        <div class="flex flex-row text-center mx-auto justify-center">
+          <p class="mx-3 text-xl font-mono">Mekanda alkollü içecek var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.isAlcoholIncluded ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+        <div class="flex flex-row text-center mx-auto justify-center">
+          <p class="mx-3 text-xl font-mono">Mekanda yemek var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.isFoodIncluded ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+        <div class="flex flex-row text-center mx-auto justify-center">
+          <p class="mx-3 text-xl font-mono">Maksimum Kapasite :</p>
+          <span class="text-xl text-teal-600"
+            >{{ currentWeddingPlace.capacity }} Kişilik</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

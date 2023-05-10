@@ -7,7 +7,7 @@ import { CityService } from 'src/app/services/city.service';
   templateUrl: './search-weddingplace.component.html',
 })
 export class SearchWeddingplaceComponent {
-  @Input() filterText: string='';
+  @Input() filterText: string = '';
   cities: City[] = [];
   constructor(private _city: CityService) {}
 
@@ -18,7 +18,6 @@ export class SearchWeddingplaceComponent {
   getCities() {
     this._city.getCities().subscribe((cities) => {
       this.cities = cities.data;
-      console.log(this.cities);
     });
   }
 }

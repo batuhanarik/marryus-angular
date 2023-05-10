@@ -22,7 +22,7 @@
     </div>
   </div>
 </div>
-<form [formGroup]="weddingPlaceForm" (ngSubmit)="submit()">
+<form [formGroup]="weddingPlaceForm" (ngSubmit)="submit()" class="">
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -94,20 +94,165 @@
           </div>
         </div>
 
+        <div class="sm:col-span-6">
+          <div class="w-full">
+            <!-- Alkol Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="isAlcoholIncluded"
+                  formControlName="isAlcoholIncluded"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerinde alkol satışı veya menülerde alkol var mı?</span
+                >
+              </label>
+            </div>
+            <!-- Yemek Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="isFoodIncluded"
+                  formControlName="isFoodIncluded"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerindeki menülerde yemek var mı?</span
+                >
+              </label>
+            </div>
+            <!-- Kokteyl Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="isCocktailIncluded"
+                  formControlName="isCocktailIncluded"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerindeki kokteyl var mı?</span
+                >
+              </label>
+            </div>
+
+            <!-- Vale Hizmeti Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="hasValetService"
+                  formControlName="hasValetService"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerinde vale hizmeti var mı?</span
+                >
+              </label>
+            </div>
+            <!-- Engelli Girişi  Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="hasHandicapEntrance"
+                  formControlName="hasHandicapEntrance"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerinde engelli girişi var mı?</span
+                >
+              </label>
+            </div>
+
+            <!-- Hazırlık Odası  Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="hasPrepRoom"
+                  formControlName="hasPrepRoom"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerinde hazırlık odası var mı?</span
+                >
+              </label>
+            </div>
+
+            <!-- Olumsuz hava koşullarına karşı önlem  Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="hasAnyMeasureAgainstAdverseWeatherConditions"
+                  formControlName="hasAnyMeasureAgainstAdverseWeatherConditions"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3"
+                  >Düğün yerinde olumsuz hava koşullarına karşı önlem var
+                  mı?</span
+                >
+              </label>
+            </div>
+
+            <!-- Menü Tadımı  Var Mı -->
+            <div class="form-control !flex-row">
+              <label class="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  [checked]="hasMenuTasting"
+                  formControlName="hasMenuTasting"
+                  class="checkbox"
+                />
+                <span class="label-text mx-3">Menü Tadımı Var Mı?</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fiyat Uyarısı -->
+        <div class="sm:col-span-6">
+          <div class="alert alert-info shadow-lg">
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="stroke-current flex-shrink-0 w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span class="items-center font-bold text-base"
+                >Aşağıda girilecek fiyatların tümü kişi başı hesabı yapılarak
+                hesaplanmalıdır.</span
+              >
+            </div>
+          </div>
+        </div>
+
         <!-- İlk Fiyat -->
         <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">İlk Fiyat</span>
+              <span class="label-text font-semibold">Haftaiçi İlk Fiyat</span>
             </label>
             <label class="input-group">
               <input
                 type="number"
-                formControlName="priceFirst"
-                placeholder="20.000"
+                formControlName="priceFirstWeekday"
+                placeholder="100"
                 min:1
                 max:50000000
-                step="1000"
+                step="50"
                 class="input input-bordered"
               />
               <span>TL</span>
@@ -119,16 +264,16 @@
         <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Son Fiyat</span>
+              <span class="label-text font-semibold">Haftaiçi Son Fiyat</span>
             </label>
             <label class="input-group">
               <input
                 type="number"
-                formControlName="priceLast"
-                placeholder="120.000"
+                formControlName="priceLastWeekday"
+                placeholder="300"
                 min:1
                 max:50000000
-                step="1000"
+                step="50"
                 class="input input-bordered"
               />
               <span>TL</span>
@@ -136,16 +281,141 @@
           </div>
         </div>
 
-        <!-- Maksimum Kapasiite -->
+        <!-- Haftasonu İlk Fiyat -->
         <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Kapasite</span>
+              <span class="label-text font-semibold">Haftasonu İlk Fiyat</span>
             </label>
             <label class="input-group">
               <input
                 type="number"
-                formControlName="capacity"
+                formControlName="priceFirstWeekend"
+                placeholder="100"
+                min:1
+                max:50000000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>TL</span>
+            </label>
+          </div>
+        </div>
+
+        <!--Haftasonu Son Fiyat -->
+        <div class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Haftasonu Son Fiyat</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="priceLastWeekend"
+                placeholder="300"
+                min:1
+                max:50000000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>TL</span>
+            </label>
+          </div>
+        </div>
+
+        <!--Alkol Fiyatı -->
+        <div *ngIf="isAlcoholIncluded" class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Alkol Fiyatı</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="priceAlcohol"
+                placeholder="100"
+                min:1
+                max:50000000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>TL</span>
+            </label>
+          </div>
+        </div>
+
+        <!--Yemek Fiyatı -->
+        <div *ngIf="isFoodIncluded" class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Yemek Fiyatı</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="priceFood"
+                placeholder="50"
+                min:1
+                max:50000000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>TL</span>
+            </label>
+          </div>
+        </div>
+
+        <!--Kokteyl Fiyatı -->
+        <div *ngIf="isCocktailIncluded" class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">Kokteyl Fiyatı</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="priceCocktail"
+                placeholder="50"
+                min:1
+                max:50000000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>TL</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Minimum Kapasite -->
+        <div class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">En Az kapasite</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="capacityFirst"
+                placeholder="1200"
+                min:1
+                max:1500000
+                step="50"
+                class="input input-bordered"
+              />
+              <span>Kişi</span>
+            </label>
+          </div>
+        </div>
+        <!-- Maksimum Kapasiite -->
+        <div class="sm:col-span-3">
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text font-semibold">En Fazla Kapasite</span>
+            </label>
+            <label class="input-group">
+              <input
+                type="number"
+                formControlName="capacityLast"
                 placeholder="1200"
                 min:1
                 max:1500000
@@ -198,6 +468,46 @@
           </div>
         </div>
 
+        <!-- Yetkişi Kişi Adı Soyadı -->
+        <div class="sm:col-span-4">
+          <label
+            for="phoneNumber"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Yetkişi Kişi Adı Soyadı</label
+          >
+          <div class="mt-2">
+            <input
+              type="text"
+              formControlName="authorizedPersonName"
+              name="authorizedPersonName"
+              id="authorizedPersonName"
+              autocomplete="false"
+              class="border-0 w-1/2 bg-white rounded-md py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              placeholder="Örn: Batuhan Kıran"
+            />
+          </div>
+        </div>
+
+        <!-- Açık Adres -->
+        <div class="sm:col-span-4">
+          <label
+            for="phoneNumber"
+            class="block text-sm font-medium leading-6 text-gray-900"
+            >Açık Adres</label
+          >
+          <div class="mt-2">
+            <input
+              type="text"
+              formControlName="address"
+              name="address"
+              id="address"
+              autocomplete="false"
+              class="border-0 w-1/2 bg-white rounded-md py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              placeholder="Örn: Mustafa Kemal Caddesi, 327. Sokak, Ümraniye / İstanbul"
+            />
+          </div>
+        </div>
+
         <!-- Açıklama -->
         <div class="col-span-full">
           <label
@@ -214,40 +524,9 @@
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             ></textarea>
           </div>
-          <p class="mt-3 text-sm leading-6 text-gray-600">
+          <p class="mt-3 text-xs leading-6 text-gray-600">
             Mekan hakkında özet niteliğinde açık ve net açıklama yapmalısınız.
           </p>
-
-          <div class="w-full">
-            <!-- Alkol Var Mı -->
-            <div class="form-control">
-              <label class="label cursor-pointer">
-                <span class="label-text"
-                  >Düğün yerinde alkol satışı veya menülerde alkol var mı?</span
-                >
-                <input
-                  type="checkbox"
-                  [checked]="isAlcoholIncluded"
-                  formControlName="isAlcoholIncluded"
-                  class="checkbox"
-                />
-              </label>
-            </div>
-            <!-- Yemek Var Mı -->
-            <div class="form-control">
-              <label class="label cursor-pointer">
-                <span class="label-text"
-                  >Düğün yerindeki menülerde yemek var mı?</span
-                >
-                <input
-                  type="checkbox"
-                  [checked]="isFoodIncluded"
-                  formControlName="isFoodIncluded"
-                  class="checkbox"
-                />
-              </label>
-            </div>
-          </div>
         </div>
 
         <!-- Resimler -->

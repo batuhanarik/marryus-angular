@@ -6,12 +6,25 @@ export interface WeddingPlace {
   phoneNumber: string;
   description: string;
   capacity: number;
-  priceFirst: number;
-  priceLast: number;
+  priceFirstWeekday: number;
+  priceLastWeekday: number;
+  priceFirstWeekend: number;
+  priceLastWeekend: number;
   discountRate: number;
   placeOwnerId: number;
   isReserved: boolean;
   isFoodIncluded: boolean;
   isAlcoholIncluded: boolean;
+  isCocktailIncluded: boolean;
+  anotherWeddingAtPlaceSameTime: boolean;
+  hasAfterPartyArea: boolean;
+  hasMenuTasting: boolean;
+  hasSoundLightandStageService: boolean;
+  hasValetService: boolean;
+  hasHandicapEntrance: boolean;
+  hasPrepRoom: boolean;
+  hasAnyMeasureAgainstAdverseWeatherConditions: boolean;
+  address: boolean;
+  authorizedPersonName: string;
   placeStatus: boolean;
 }

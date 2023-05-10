@@ -88,8 +88,14 @@ export class UpdateWeddingplaceComponent {
       phoneNumber: [this.weddingPlace.phoneNumber, Validators.required],
       description: [this.weddingPlace.description, Validators.required],
       capacity: [this.weddingPlace.capacity, Validators.required],
-      priceFirst: [this.weddingPlace.priceFirst, Validators.required],
-      priceLast: [this.weddingPlace.priceLast, Validators.required],
+      priceFirstWeekday: [
+        this.weddingPlace.priceFirstWeekday,
+        Validators.required,
+      ],
+      priceLastWeekday: [
+        this.weddingPlace.priceLastWeekday,
+        Validators.required,
+      ],
       discountRate: [this.weddingPlace.discountRate, Validators.required],
       isFoodIncluded: [this.weddingPlace.isFoodIncluded, Validators.required],
       isAlcoholIncluded: [

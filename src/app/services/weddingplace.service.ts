@@ -44,6 +44,14 @@ export class WeddingplaceService {
     );
   }
 
+  getWeddingPlaceDetail(
+    wpId: number
+  ): Observable<ObjectResponseModel<WeddingPlaceDetailDto>> {
+    return this._http.get<ObjectResponseModel<WeddingPlaceDetailDto>>(
+      this.weddingPlacesUrl + '/getdetailbyid?wpId=' + wpId
+    );
+  }
+
   getWeddingPlaceDetailsByCity(
     id: number
   ): Observable<ListResponseModel<WeddingPlaceDetailDto>> {
@@ -85,6 +93,12 @@ export class WeddingplaceService {
       this.weddingPlaceImagesUrl + '/AddMultiple',
       formData
     );
+  }
+
+  deleteWeddingPlace(weddingPlaceId: number): Observable<ResponseModel> {
+    return this._http.post<ResponseModel>(this.weddingPlacesUrl + '/delete', {
+      weddingPlaceId: weddingPlaceId,
+    });
   }
 
   deleteWeddingPlaceImage(image: WeddingPlaceImage): Observable<ResponseModel> {

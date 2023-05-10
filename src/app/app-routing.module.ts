@@ -8,6 +8,8 @@ import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/add-weddingplace.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
+import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 
 const routes: Routes = [
   {
@@ -23,7 +25,11 @@ const routes: Routes = [
       {
         path: 'weddingplaces',
         component: WeddingPlacesComponent,
-        children: [{ path: '', component: WeddingPlacesComponent }],
+        children: [{ path: '', component: WeddingplaceItemsComponent }],
+      },
+      {
+        path: 'detail/:weddingPlaceId',
+        component: WeddingplaceDetailComponent,
       },
       {
         path: 'profile',

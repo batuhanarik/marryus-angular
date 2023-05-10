@@ -6,6 +6,7 @@ import { WeddingPlaceDetailDto } from 'src/app/models/weddingPlaceDetailDto';
 import { ApiImagePipe } from 'src/app/pipes/api-image.pipe';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
 import { UpdateWeddingplaceComponent } from '../admin/update-weddingplace/update-weddingplace.component';
+import { WeddingPlace } from 'src/app/models/weddingPlace';
 
 @Component({
   selector: 'app-home-admin',
@@ -38,7 +39,16 @@ export class HomeAdminComponent {
       }
     });
   }
-
+  deleteWeddingPlace(weddingPlace: WeddingPlaceDetailDto) {
+    this.weddingPlaceService
+      .deleteWeddingPlace(weddingPlace.weddingPlaceId)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.toastrService.success(res.message);
+          this.getWeddingPlaces();
+        }
+      });
+  }
   editWeddingPlace(weddingPlace: WeddingPlaceDetailDto) {
     this.ref = this.dialogService.open(UpdateWeddingplaceComponent, {
       header: 'Düğün Yeri Güncelle',

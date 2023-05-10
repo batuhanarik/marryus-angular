@@ -36,11 +36,14 @@ import { UpdateWeddingplaceComponent } from './components/admin/update-weddingpl
 import { ProfileComponent } from './components/profile/profile.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { GalleriaModule } from 'primeng/galleria';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card';
+import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
+import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -61,6 +64,8 @@ const ngZorroConfig: NzConfig = {
     ApiImagePipe,
     UpdateWeddingplaceComponent,
     ProfileComponent,
+    WeddingplaceDetailComponent,
+    WeddingplaceItemsComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +91,7 @@ const ngZorroConfig: NzConfig = {
     DropdownModule,
     FileUploadModule,
     CardModule,
+    GalleriaModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

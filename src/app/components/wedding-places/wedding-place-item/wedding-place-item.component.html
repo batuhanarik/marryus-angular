@@ -9,11 +9,16 @@
     </figure>
     <div class="card-body">
       <h2 class="text-center font-bold italic text-xl">
-        {{ weddingPlace.weddingPlaceName }} - {{ weddingPlace.province }}
+        {{ weddingPlace.weddingPlaceName }} - {{ weddingPlace.provinceName }}
       </h2>
 
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">Detaya Git!</button>
+        <button
+          routerLink="/detail/{{ weddingPlace.weddingPlaceId }}"
+          class="btn btn-primary"
+        >
+          Detaya Git!
+        </button>
       </div>
     </div>
   </div>

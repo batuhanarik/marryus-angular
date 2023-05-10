@@ -9,7 +9,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
   Validators,
-  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
@@ -34,25 +33,62 @@ import { FileUploadModule } from 'primeng/fileupload';
     NzAlertModule,
     FileUploadModule,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class AddWeddingplaceComponent {
   isFoodIncluded: boolean = false;
   isAlcoholIncluded: boolean = false;
+  hasAnyMeasureAgainstAdverseWeatherConditions: boolean = false;
+  hasPrepRoom: boolean = false;
+  hasHandicapEntrance: boolean = false;
+  hasValetService: boolean = false;
+  hasSoundLightandStageService: boolean = false;
+  hasMenuTasting: boolean = false;
+  hasAfterPartyArea: boolean = false;
+  anotherWeddingAtPlaceSameTime: boolean = false;
+  isCocktailIncluded: boolean = false;
+
   weddingPlaceForm = this._formBuilder.nonNullable.group({
     plateCode: [1, Validators.required],
     categoryId: [1, Validators.required],
     placeName: ['', Validators.required],
     phoneNumber: ['', Validators.required],
     description: ['', Validators.required],
-    capacity: [0, Validators.required],
-    priceFirst: [0, Validators.required],
-    priceLast: [0, Validators.required],
+    capacityFirst: [null, Validators.required],
+    capacityLast: [null, Validators.required],
+    priceFirstWeekday: [0, Validators.required],
+    priceLastWeekday: [0, Validators.required],
+    priceFirstWeekend: [0, Validators.required],
+    priceLastWeekend: [0, Validators.required],
+    address: ['', Validators.required],
+    authorizedPersonName: ['', Validators.required],
+    hasAnyMeasureAgainstAdverseWeatherConditions: [
+      this.hasAnyMeasureAgainstAdverseWeatherConditions,
+      Validators.required,
+    ],
+    hasPrepRoom: [this.hasPrepRoom, Validators.required],
+    hasHandicapEntrance: [this.hasHandicapEntrance, Validators.required],
+    hasValetService: [this.hasValetService, Validators.required],
+    hasSoundLightandStageService: [
+      this.hasSoundLightandStageService,
+      Validators.required,
+    ],
+    hasMenuTasting: [this.hasMenuTasting, Validators.required],
+    hasAfterPartyArea: [this.hasAfterPartyArea, Validators.required],
+    anotherWeddingAtPlaceSameTime: [
+      this.anotherWeddingAtPlaceSameTime,
+      Validators.required,
+    ],
     discountRate: [Validators.min(0)],
     placeOwnerId: 1,
     isReserved: [false, Validators.required],
     isFoodIncluded: [this.isFoodIncluded, Validators.required],
     isAlcoholIncluded: [this.isAlcoholIncluded, Validators.required],
+    isCocktailIncluded: [this.isCocktailIncluded, Validators.required],
+    priceAlcohol: [null],
+    priceFood: [null],
+    priceCocktail: [null],
+
     placeStatus: true,
   });
   cities: City[] = [];
