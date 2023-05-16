@@ -4,7 +4,7 @@
       <p-galleria
         [value]="currentWeddingPlace.weddingPlaceImages"
         [containerStyle]="{
-          'max-width': '540px',
+          'max-width': '530px',
           'min-width': '480px'
         }"
         [numVisible]="5"
@@ -25,25 +25,75 @@
         <h1 class="text-3xl text-center text-fuchsia-800">
           {{ currentWeddingPlace.weddingPlaceName }}
         </h1>
-        <div class="flex flex-row text-center mx-auto justify-center">
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">Açık Adres :</p>
+          <span
+            class="text-xl text-teal-600 max-w-xl overflow-hidden text-ellipsis whitespace-nowrap max-sm:max-md:whitespace-normal"
+            >{{ currentWeddingPlace.address }}
+          </span>
+        </div>
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">Telefon :</p>
+          <span class="text-xl text-teal-600"
+            >{{ currentWeddingPlace.phoneNumber }}
+          </span>
+        </div>
+        <div class="flex flex-row text-left justify-start">
           <p class="mx-3 text-xl font-mono">Mekanda alkollü içecek var mı ?</p>
           <span class="text-xl text-teal-600">{{
             currentWeddingPlace.isAlcoholIncluded ? "Evet" : "Hayır"
           }}</span>
         </div>
-        <div class="flex flex-row text-center mx-auto justify-center">
+        <div class="flex flex-row text-left justify-start">
           <p class="mx-3 text-xl font-mono">Mekanda yemek var mı ?</p>
           <span class="text-xl text-teal-600">{{
             currentWeddingPlace.isFoodIncluded ? "Evet" : "Hayır"
           }}</span>
         </div>
-        <div class="flex flex-row text-center mx-auto justify-center">
+
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">Mekanda kokteyl var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.isCocktailIncluded ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+        <div class="flex flex-row text-left justify-start">
           <p class="mx-3 text-xl font-mono">Maksimum Kapasite :</p>
           <span class="text-xl text-teal-600"
-            >{{ currentWeddingPlace.capacity }} Kişilik</span
+            >{{ currentWeddingPlace.capacityFirst }} -
+            {{ currentWeddingPlace.capacityLast }} Kişilik</span
           >
+        </div>
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">After parti alanı var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.hasAfterPartyArea ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">
+            Düğün öncesi menü tadımı var mı ?
+          </p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.hasMenuTasting ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">Vale hizmeti var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.hasValetService ? "Evet" : "Hayır"
+          }}</span>
+        </div>
+
+        <div class="flex flex-row text-left justify-start">
+          <p class="mx-3 text-xl font-mono">Mekanda engelli girişi var mı ?</p>
+          <span class="text-xl text-teal-600">{{
+            currentWeddingPlace.hasHandicapEntrance ? "Evet" : "Hayır"
+          }}</span>
         </div>
       </div>
     </div>
+    <button class="btn btn-block">Devam Et</button>
   </div>
 </div>

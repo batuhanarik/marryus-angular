@@ -44,6 +44,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CardModule } from 'primeng/card';
 import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
 import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
+import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -66,6 +67,7 @@ const ngZorroConfig: NzConfig = {
     ProfileComponent,
     WeddingplaceDetailComponent,
     WeddingplaceItemsComponent,
+    WeddingplaceDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { catchError, of } from 'rxjs';
 import { City } from 'src/app/models/City';
 import { Category } from 'src/app/models/category';
 import { WeddingPlace } from 'src/app/models/weddingPlace';
@@ -87,13 +88,14 @@ export class UpdateWeddingplaceComponent {
       placeName: [this.weddingPlace.placeName, Validators.required],
       phoneNumber: [this.weddingPlace.phoneNumber, Validators.required],
       description: [this.weddingPlace.description, Validators.required],
-      capacity: [this.weddingPlace.capacity, Validators.required],
-      priceFirstWeekday: [
-        this.weddingPlace.priceFirstWeekday,
+      capacityFirst: [this.weddingPlace.capacityFirst, Validators.required],
+      capacityLast: [this.weddingPlace.capacityLast, Validators.required],
+      priceWeekday: [
+        this.weddingPlace.priceWeekday,
         Validators.required,
       ],
-      priceLastWeekday: [
-        this.weddingPlace.priceLastWeekday,
+      priceWeekend: [
+        this.weddingPlace.priceWeekend,
         Validators.required,
       ],
       discountRate: [this.weddingPlace.discountRate, Validators.required],
@@ -102,6 +104,35 @@ export class UpdateWeddingplaceComponent {
         this.weddingPlace.isAlcoholIncluded,
         Validators.required,
       ],
+      isCocktailIncluded: [
+        this.weddingPlace.isAlcoholIncluded,
+        Validators.required,
+      ],
+      hasAfterPartyArea: [
+        this.weddingPlace.hasAfterPartyArea,
+        Validators.required,
+      ],
+      hasMenuTasting: [this.weddingPlace.hasMenuTasting, Validators.required],
+      hasSoundLightandStageService: [
+        this.weddingPlace.hasSoundLightandStageService,
+        Validators.required,
+      ],
+      hasValetService: [this.weddingPlace.hasValetService, Validators.required],
+      hasHandicapEntrance: [
+        this.weddingPlace.hasHandicapEntrance,
+        Validators.required,
+      ],
+      hasPrepRoom: [this.weddingPlace.hasPrepRoom, Validators.required],
+      hasAnyMeasureAgainstAdverseWeatherConditions: [
+        this.weddingPlace.hasAnyMeasureAgainstAdverseWeatherConditions,
+        Validators.required,
+      ],
+      authorizedPersonName: [
+        this.weddingPlace.authorizedPersonName,
+        Validators.required,
+      ],
+      address: [this.weddingPlace.address, Validators.required],
+
       placeStatus: [true, Validators.required],
     });
   }
@@ -123,10 +154,18 @@ export class UpdateWeddingplaceComponent {
     }
     this.weddingPlaceService
       .addWeddingPlaceImages(imagesToUpload, this.weddingPlace.weddingPlaceId)
+      .pipe(
+        catchError((res: any) => {
+          this.toastrService.error(res.error.message);
+          return of(null);
+        })
+      )
       .subscribe((result) => {
         if (result.success) {
           this.toastrService.success(result.message);
           this.getWeddingPlaceImages();
+        } else {
+          console.log(result);
         }
       });
   }

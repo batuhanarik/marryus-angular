@@ -106,7 +106,7 @@
                   class="checkbox"
                 />
                 <span class="label-text mx-3"
-                  >Düğün yerinde alkol satışı veya menülerde alkol var mı?</span
+                  >Düğün yerinde alkol hizmeti var mı?</span
                 >
               </label>
             </div>
@@ -120,7 +120,7 @@
                   class="checkbox"
                 />
                 <span class="label-text mx-3"
-                  >Düğün yerindeki menülerde yemek var mı?</span
+                  >Düğün yerinde yemek hizmeti var mı?</span
                 >
               </label>
             </div>
@@ -239,16 +239,16 @@
           </div>
         </div>
 
-        <!-- İlk Fiyat -->
+        <!-- Haftaiçi Fiyat -->
         <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Haftaiçi İlk Fiyat</span>
+              <span class="label-text font-semibold">Haftaiçi Fiyat</span>
             </label>
             <label class="input-group">
               <input
                 type="number"
-                formControlName="priceFirstWeekday"
+                formControlName="priceWeekday"
                 placeholder="100"
                 min:1
                 max:50000000
@@ -260,37 +260,18 @@
           </div>
         </div>
 
-        <!-- Son Fiyat -->
-        <div class="sm:col-span-3">
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-semibold">Haftaiçi Son Fiyat</span>
-            </label>
-            <label class="input-group">
-              <input
-                type="number"
-                formControlName="priceLastWeekday"
-                placeholder="300"
-                min:1
-                max:50000000
-                step="50"
-                class="input input-bordered"
-              />
-              <span>TL</span>
-            </label>
-          </div>
-        </div>
 
-        <!-- Haftasonu İlk Fiyat -->
+
+        <!-- Haftasonu Fiyat -->
         <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
-              <span class="label-text font-semibold">Haftasonu İlk Fiyat</span>
+              <span class="label-text font-semibold">Haftasonu Fiyat</span>
             </label>
             <label class="input-group">
               <input
                 type="number"
-                formControlName="priceFirstWeekend"
+                formControlName="priceWeekend"
                 placeholder="100"
                 min:1
                 max:50000000
@@ -302,29 +283,10 @@
           </div>
         </div>
 
-        <!--Haftasonu Son Fiyat -->
-        <div class="sm:col-span-3">
-          <div class="form-control">
-            <label class="label">
-              <span class="label-text font-semibold">Haftasonu Son Fiyat</span>
-            </label>
-            <label class="input-group">
-              <input
-                type="number"
-                formControlName="priceLastWeekend"
-                placeholder="300"
-                min:1
-                max:50000000
-                step="50"
-                class="input input-bordered"
-              />
-              <span>TL</span>
-            </label>
-          </div>
-        </div>
+
 
         <!--Alkol Fiyatı -->
-        <div *ngIf="isAlcoholIncluded" class="sm:col-span-3">
+        <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
               <span class="label-text font-semibold">Alkol Fiyatı</span>
@@ -345,7 +307,7 @@
         </div>
 
         <!--Yemek Fiyatı -->
-        <div *ngIf="isFoodIncluded" class="sm:col-span-3">
+        <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
               <span class="label-text font-semibold">Yemek Fiyatı</span>
@@ -366,13 +328,14 @@
         </div>
 
         <!--Kokteyl Fiyatı -->
-        <div *ngIf="isCocktailIncluded" class="sm:col-span-3">
+        <div class="sm:col-span-3">
           <div class="form-control">
             <label class="label">
               <span class="label-text font-semibold">Kokteyl Fiyatı</span>
             </label>
             <label class="input-group">
               <input
+                [disabled]="!isCocktailIncluded"
                 type="number"
                 formControlName="priceCocktail"
                 placeholder="50"
@@ -532,6 +495,10 @@
         <!-- Resimler -->
         <div class="col-span-full">
           <div class="my-3">
+            <span class="font-bold text-sm"
+              >İşletmenizin fotoğraflarınızı yükleyebilirsiniz. Maksimum 5 adet
+              fotoğraf yüklenebilir.</span
+            >
             <p-fileUpload
               [customUpload]="true"
               (uploadHandler)="setImages($event)"

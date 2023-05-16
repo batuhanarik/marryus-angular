@@ -7,11 +7,24 @@ export interface WeddingPlaceDetailDto {
   weddingPlaceName: string;
   provinceName: string;
   categoryName: string;
+  phoneNumber: string;
+  address: string;
   description: string;
-  priceFirst: number;
-  priceLast: number;
+  capacityFirst: number;
+  capacityLast: number;
+  priceWeekday: number;
+  priceWeekend: number;
   discountRate: number;
   isAlcoholIncluded: boolean;
   isFoodIncluded: boolean;
+  isCocktailIncluded: boolean;
+  hasAfterPartyArea: boolean;
+  hasMenuTasting: boolean;
+  hasSoundLightandStageService: boolean;
+  hasValetService: boolean;
+  hasHandicapEntrance: boolean;
+  hasPrepRoom: boolean;
+  hasAnyMeasureAgainstAdverseWeatherConditions: boolean;
+  authorizedPersonName: string;
   weddingPlaceImages: WeddingPlaceImage[];
 }

@@ -70,44 +70,68 @@
         ></p-dropdown>
       </div>
 
+
+
       <div class="col-4 mt-2">
-        <h5>İlk Fiyat</h5>
+        <h5>Haftaiçi Fiyat</h5>
         <span class="p-float-label mt-1">
           <input
             class="p-inputtext"
-            id="priceFirst"
+            id="priceWeekday"
             type="number"
             step="1000"
-            formControlName="priceFirst"
+            formControlName="priceWeekday"
             pInputText
           />
         </span>
       </div>
 
       <div class="col-4 mt-2">
-        <h5>Son Fiyat</h5>
+        <h5>Haftasonu Fiyat</h5>
         <span class="p-float-label mt-1">
           <input
             class="p-inputtext"
-            id="priceLast"
+            id="priceWeekend"
             type="number"
             step="1000"
-            formControlName="priceLast"
+            formControlName="priceWeekend"
             pInputText
           />
         </span>
       </div>
+
     </div>
     <!-- Maksimum Kapasiite -->
     <div class="sm:col-span-3">
       <div class="form-control">
         <label class="label">
-          <span class="label-text font-semibold">Kapasite</span>
+          <span class="label-text font-semibold">İlk Kapasite</span>
         </label>
         <label class="input-group">
           <input
             type="number"
-            formControlName="capacity"
+            formControlName="capacityFirst"
+            placeholder="1200"
+            min:1
+            max:1500000
+            step="50"
+            class="input input-bordered"
+          />
+          <span>Kişi</span>
+        </label>
+      </div>
+    </div>
+    <!-- Son Kapasiite -->
+
+    <div class="sm:col-span-3">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text font-semibold">Son Kapasite</span>
+        </label>
+        <label class="input-group">
+          <input
+            type="number"
+            formControlName="capacityLast"
             placeholder="1200"
             min:1
             max:1500000
@@ -159,13 +183,51 @@
         />
       </div>
     </div>
+
+    <!-- Yetkili Kişi Adı -->
+    <div class="sm:col-span-4">
+      <label
+        for="authorizedPersonName"
+        class="block text-sm font-medium leading-6 text-gray-900"
+        >Yetkili Kişi Adı</label
+      >
+      <div class="mt-2">
+        <input
+          type="text"
+          formControlName="authorizedPersonName"
+          name="authorizedPersonName"
+          id="authorizedPersonName"
+          autocomplete="false"
+          class="border-2 w-1/2 bg-white rounded-md py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          placeholder="Örn: 552 615 22 39"
+        />
+      </div>
+    </div>
+
+    <!-- Adres -->
+    <div class="sm:col-span-4">
+      <label
+        for="address"
+        class="block text-sm font-medium leading-6 text-gray-900"
+        >Adres</label
+      >
+      <div class="mt-2">
+        <input
+          type="text"
+          formControlName="address"
+          name="address"
+          id="address"
+          autocomplete="false"
+          class="border-2 w-1/2 bg-white rounded-md py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+          placeholder="Örn: 552 615 22 39"
+        />
+      </div>
+    </div>
     <div class="w-full">
       <!-- Alkol Var Mı -->
       <div class="form-control">
         <label class="label cursor-pointer">
-          <span class="label-text"
-            >Düğün yerinde alkol satışı veya menülerde alkol var mı?</span
-          >
+          <span class="label-text">Düğün yerinde alkol hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="isAlcoholIncluded"
@@ -176,9 +238,7 @@
       <!-- Yemek Var Mı -->
       <div class="form-control">
         <label class="label cursor-pointer">
-          <span class="label-text"
-            >Düğün yerindeki menülerde yemek var mı?</span
-          >
+          <span class="label-text">Düğün yerinde yemek hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="isFoodIncluded"
@@ -186,10 +246,77 @@
           />
         </label>
       </div>
+
+      <!-- Kokteyl Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Düğün yerinde kokteyl hizmeti var mı?</span>
+          <input
+            type="checkbox"
+            formControlName="isCocktailIncluded"
+            class="checkbox"
+          />
+        </label>
+      </div>
+
+      <!-- Vale Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Düğün yerinde vale hizmeti var mı?</span>
+          <input
+            type="checkbox"
+            formControlName="hasValetService"
+            class="checkbox"
+          />
+        </label>
+      </div>
+
+      <!-- Menü Tadım Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text"
+            >Düğün öncesi menü tadım hizmeti var mı?</span
+          >
+          <input
+            type="checkbox"
+            formControlName="hasMenuTasting"
+            class="checkbox"
+          />
+        </label>
+      </div>
+
+      <!-- Hava Koşullarına Önlem Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text"
+            >Düğün yerinde olumsuz hava koşullarına karşı önlem var mı?</span
+          >
+          <input
+            type="checkbox"
+            formControlName="hasAnyMeasureAgainstAdverseWeatherConditions"
+            class="checkbox"
+          />
+        </label>
+      </div>
+
+      <!-- Hazırlık Odası Var Mı -->
+      <div class="form-control">
+        <label class="label cursor-pointer">
+          <span class="label-text">Düğün yerinde hazırlık odası var mı?</span>
+          <input
+            type="checkbox"
+            formControlName="hasPrepRoom"
+            class="checkbox"
+          />
+        </label>
+      </div>
     </div>
+
+    <!-- Açıklama -->
     <div class="mt-4 text-center">
       <h5>Açıklama</h5>
       <textarea
+        class="w-full"
         rows="8"
         cols="70"
         pInputTextarea

@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:where(.drawer-toggle ~ .drawer-content) {
+    height: auto;
+  }
+ul{
+    margin-bottom: 0rem !important;
+}

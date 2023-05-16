@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { catchError, of } from 'rxjs';
 import { LoginInput } from 'src/app/models/auth.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,7 +26,11 @@ export class LoginComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
-  constructor(private _fb: FormBuilder, private _service: AuthService) {}
+  constructor(
+    private _fb: FormBuilder,
+    private _service: AuthService,
+    private toastrService: ToastrService
+  ) {}
 
   submit() {
     if (this.form.invalid) {
@@ -44,18 +49,12 @@ export class LoginComponent {
             showConfirmButton: false,
             timer: 1500,
           });
-          return of();
+          return of(null);
         })
       )
       .subscribe((res: any) => {
         if (res.token !== null) {
-          Swal.fire({
-            position: 'bottom-end',
-            icon: 'success',
-            title: `Giriş Başarılı!`,
-            showConfirmButton: false,
-            timer: 1500,
-          });
+          this.toastrService.success('Giriş Başarılı.');
         }
       });
   }

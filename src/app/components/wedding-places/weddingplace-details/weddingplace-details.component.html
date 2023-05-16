@@ -1,0 +1,190 @@
+<div *ngIf="wpLoaded" class="container w-full">
+  <h1 class="text-3xl text-center text-fuchsia-800 font-sans">
+    {{ currentWeddingPlace.weddingPlaceName }}
+  </h1>
+  <!-- Fotoğraflar -->
+  <p-galleria
+    [value]="currentWeddingPlace.weddingPlaceImages"
+    [showIndicators]="true"
+    [showThumbnails]="false"
+    [responsiveOptions]="responsiveOptions"
+    [containerStyle]="{ 'max-width': '100%' }"
+    [numVisible]="5"
+    [circular]="true"
+    [autoPlay]="true"
+    [showItemNavigators]="true"
+  >
+    <ng-template pTemplate="item" let-item>
+      <img
+        [src]="item.imagePath | apiImage"
+        style="width: 95%; display: block; max-height: 28rem"
+      />
+    </ng-template>
+  </p-galleria>
+
+  <!-- Açık Adres -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-[#DB7093]">Açık Adresiniz Nedir ?</div>
+    </div>
+
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        {{ currentWeddingPlace.address }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Telefon -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">Telefon Numaranız Nedir ?</div>
+    </div>
+
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        {{ currentWeddingPlace.phoneNumber }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Alkollü İçecek -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        Mekanda alkollü içecek bulunuyor mu ?
+        {{ currentWeddingPlace.isAlcoholIncluded ? "Evet" : "Hayır" }}
+      </div>
+    </div>
+
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        {{
+          currentWeddingPlace.isAlcoholIncluded
+            ? "Evet, alkollü içeceklerimiz bulunmaktadır."
+            : "Hayır, alkollü içeceklerimiz bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+  <!-- Yemek -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        Mekanda yemek seçenekleriniz var mı ?
+      </div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        {{
+          currentWeddingPlace.isFoodIncluded
+            ? "Evet, yemek menülerimiz bulunmaktadır."
+            : "Hayır, yemek menüsü bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Düğün öncesi menü tadımı var mı -->
+  <div *ngIf="currentWeddingPlace.isFoodIncluded">
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        Düğün öncesi menü tadımı var mı?
+      </div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        {{
+          currentWeddingPlace.hasMenuTasting
+            ? "Evet, düğün öncesi menü tadımımız bulunmaktadır."
+            : "Hayır, düğün öncesi menü tadımımız bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Kokteyl -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">Mekanda kokteyl var mı ?</div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        {{ currentWeddingPlace.isCocktailIncluded ? "Evet" : "Hayır" }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Max Kapasite -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-[#DB7093]">Maksimum Kapasiteniz Nedir?</div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        Mekanımız
+        {{ currentWeddingPlace.capacityFirst }} -
+        {{ currentWeddingPlace.capacityLast }} Kişiliktir.
+      </div>
+    </div>
+  </div>
+  <!-- After parti alanı -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">After parti alanı var mı ?</div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        {{
+          currentWeddingPlace.hasAfterPartyArea
+            ? "Evet, after parti alanımız bulunmaktadır."
+            : "Hayır, after parti alanımız bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Vale hizmeti var mı ? -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-[#DB7093]">Vale hizmeti var mı ?</div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-[#DB7093]">
+        {{
+          currentWeddingPlace.hasValetService
+            ? "Evet, vale hizmetimiz bulunmaktadır."
+            : "Hayır, vale hizmetimiz bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Engelli girişi var mı ? -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">Mekanda engelli girişi var mı ?</div>
+    </div>
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        {{
+          currentWeddingPlace.hasHandicapEntrance
+            ? "Evet, engelli girişimiz bulunmaktadır."
+            : "Hayır, engelli girişimiz bulunmamaktadır."
+        }}
+      </div>
+    </div>
+  </div>
+  <!-- Açıklama -->
+  <div class="mt-4 text-center">
+    <textarea
+      class="w-full"
+      disabled
+      rows="8"
+      cols="70"
+      pInputTextarea
+      [autoResize]="true"
+      [(ngModel)]="currentWeddingPlace.description"
+    ></textarea>
+  </div>
+</div>

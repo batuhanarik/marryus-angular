@@ -10,6 +10,7 @@ import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/ad
 import { ProfileComponent } from './components/profile/profile.component';
 import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
 import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
+import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'detail/:weddingPlaceId',
-        component: WeddingplaceDetailComponent,
+        component: WeddingplaceDetailsComponent,
       },
       {
         path: 'profile',

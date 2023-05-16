@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  NgZone,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -33,11 +34,12 @@ import { FileUploadModule } from 'primeng/fileupload';
     NzAlertModule,
     FileUploadModule,
   ],
-  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class AddWeddingplaceComponent {
   isFoodIncluded: boolean = false;
   isAlcoholIncluded: boolean = false;
+  isCocktailIncluded: boolean = true;
+
   hasAnyMeasureAgainstAdverseWeatherConditions: boolean = false;
   hasPrepRoom: boolean = false;
   hasHandicapEntrance: boolean = false;
@@ -46,7 +48,6 @@ export class AddWeddingplaceComponent {
   hasMenuTasting: boolean = false;
   hasAfterPartyArea: boolean = false;
   anotherWeddingAtPlaceSameTime: boolean = false;
-  isCocktailIncluded: boolean = false;
 
   weddingPlaceForm = this._formBuilder.nonNullable.group({
     plateCode: [1, Validators.required],
@@ -56,10 +57,8 @@ export class AddWeddingplaceComponent {
     description: ['', Validators.required],
     capacityFirst: [null, Validators.required],
     capacityLast: [null, Validators.required],
-    priceFirstWeekday: [0, Validators.required],
-    priceLastWeekday: [0, Validators.required],
-    priceFirstWeekend: [0, Validators.required],
-    priceLastWeekend: [0, Validators.required],
+    priceWeekday: [0, Validators.required],
+    priceWeekend: [0, Validators.required],
     address: ['', Validators.required],
     authorizedPersonName: ['', Validators.required],
     hasAnyMeasureAgainstAdverseWeatherConditions: [
@@ -156,6 +155,7 @@ export class AddWeddingplaceComponent {
                 this.toastrService.success(imgRes.message);
                 this.weddingPlaceForm.reset();
                 this.images = [];
+                this.router.navigateByUrl('/admin');
               } else {
                 this.toastrService.error(
                   imgRes.message,

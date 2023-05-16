@@ -52,7 +52,7 @@ export class HomeAdminComponent {
   editWeddingPlace(weddingPlace: WeddingPlaceDetailDto) {
     this.ref = this.dialogService.open(UpdateWeddingplaceComponent, {
       header: 'Düğün Yeri Güncelle',
-      width: '70%',
+      width: '90%',
       contentStyle: { 'min-height': '300px', overflow: 'auto' },
       data: weddingPlace,
     });
