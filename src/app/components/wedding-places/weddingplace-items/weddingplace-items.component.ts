@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { City } from 'src/app/models/City';
 import { WeddingPlaceDetailDto } from 'src/app/models/weddingPlaceDetailDto';
 import { CityService } from 'src/app/services/city.service';
@@ -9,13 +10,16 @@ import { WeddingplaceService } from 'src/app/services/weddingplace.service';
   templateUrl: './weddingplace-items.component.html',
 })
 export class WeddingplaceItemsComponent {
+  filterForm: FormGroup;
   weddingPlaces: WeddingPlaceDetailDto[] = [];
   cities: City[] = [];
+  citiesLoaded: boolean = false;
   loading: boolean = false;
   filterText: string = '';
   constructor(
     private weddingPlaceService: WeddingplaceService,
-    private cityService: CityService
+    private cityService: CityService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +50,17 @@ export class WeddingplaceItemsComponent {
   getCities() {
     this.cityService.getCities().subscribe((res: any) => {
       this.cities = res.data;
+      this.citiesLoaded = true;
+    });
+  }
+
+  createFilterForm() {
+    this.filterForm = this.formBuilder.group({
+      plateCode: [null],
+      priceWeekday: [null],
+      priceWeekend: [null],
+      priceAlcohol: [null],
+      priceFood: [null],
     });
   }
 }

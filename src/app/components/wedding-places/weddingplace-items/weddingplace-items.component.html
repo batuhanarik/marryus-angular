@@ -1,5 +1,5 @@
-<div class="flex flex-row flex-wrap justify-center">
-  <div class="h-64 w-full flex flex-row">
+<div class="flex flex-row flex-wrap justify-start">
+  <!-- <div class="h-64 w-full flex flex-row">
     <div
       class="container w-full flex flex-row justify-start items-start mx-auto flex-wrap"
     >
@@ -26,6 +26,79 @@
         />
       </div>
     </div>
+  </div> -->
+  <div class="card flex w-full">
+    <p-accordion class="w-full">
+      <p-accordionTab>
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center">
+            <span class="vertical-align-middle"
+              >Filtrele
+              <i class="pi pi-search mr-2"></i>
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="flex flex-col items-center justify-center">
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Şehir seçiniz.</span>
+              </label>
+              <select class="select select-bordered">
+                <option selected>Tüm Şehirler</option>
+                <option *ngFor="let city of cities">
+                  {{ city.plateName }}
+                </option>
+              </select>
+              <label class="label"> </label>
+            </div>
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Mekan adı giriniz.</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Örn : Limon Davet"
+                class="input input-bordered w-full max-w-xs"
+              />
+            </div>
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Fiyat Giriniz (En Az)</span>
+              </label>
+              <label class="input-group">
+                <span class="text-sm">Kişi Başı</span>
+                <input
+                  type="text"
+                  placeholder="150"
+                  class="input input-bordered"
+                />
+                <span>TL</span>
+              </label>
+            </div>
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Fiyat Giriniz (En Çok)</span>
+              </label>
+              <label class="input-group">
+                <span class="text-sm">Kişi Başı</span>
+                <input
+                  type="text"
+                  placeholder="400"
+                  class="input input-bordered"
+                />
+                <span>TL</span>
+              </label>
+            </div>
+            <button
+              class="form-control btn bg-[#b2dfee] btn-block max-w-xs my-2"
+            >
+              Arama Yap
+            </button>
+          </div>
+        </ng-template>
+      </p-accordionTab>
+    </p-accordion>
   </div>
   <app-wedding-place-item
     [weddingPlace]="weddingPlace"

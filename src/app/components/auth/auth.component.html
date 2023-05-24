@@ -1,63 +1,62 @@
-<section class="h-full bg-gray-200 md:h-screen">
-    <div class="container mx-auto h-full py-12 px-6">
-      <div
-        class="g-6 flex h-full flex-wrap items-center justify-center text-gray-800"
-      >
-        <div class="xl:w-10/12">
-          <div class="block rounded-lg bg-white shadow-lg">
-            <div class="g-0 lg:flex lg:flex-wrap">
-              <div class="px-4 md:px-0 lg:w-6/12">
-                <div class="md:mx-6 md:p-12">
-                  <div class="mb-2">
-                    <div class="text-center">
-                      <img
-                        class="mx-auto w-72"
-                        src="/assets/images/marrylogo2.png"
-                        alt="logo"
-                      />
-                    </div>
-
-                    <div class="btn-group flex justify-center p-5">
-                      <button
-                        [routerLink]="['/auth/login']"
-                        [queryParamsHandling]="'preserve'"
-                        routerLinkActive="btn-active"
-                        class="btn btn-outline btn-secondary"
-                      >
-                        Giriş yap
-                      </button>
-                      <button
-                        [routerLink]="['/auth/register']"
-                        [queryParamsHandling]="'preserve'"
-                        routerLinkActive="btn-active"
-                        class="btn btn-outline btn-secondary"
-                      >
-                        Üye ol
-                      </button>
-                    </div>
+<section
+  style="background-image: url('assets/images/auth_bg.jpg')"
+  class="h-full bg-gray-200 md:h-screen bg-cover"
+>
+  <div class="container mx-auto h-full py-12 px-6">
+    <div
+      class="g-6 flex h-full flex-wrap items-center justify-center text-gray-800 opacity-90"
+    >
+      <div class="">
+        <div class="block rounded-lg bg-white shadow-lg">
+          <div class="g-0 lg:flex lg:flex-wrap">
+            <div class="px-4 md:px-0 lg:w-6/12">
+              <div class="md:mx-6 md:p-12">
+                <div class="mb-2">
+                  <div class="text-center">
+                    <img
+                      class="mx-auto w-72"
+                      src="/assets/images/marrylogo2.png"
+                      alt="logo"
+                    />
                   </div>
 
-                  <router-outlet />
+                  <div class="btn-group flex justify-center p-5">
+                    <button
+                      [routerLink]="['/auth/login']"
+                      [queryParamsHandling]="'preserve'"
+                      routerLinkActive="btn-active"
+                      class="btn btn-outline btn-secondary"
+                    >
+                      Giriş yap
+                    </button>
+                    <button
+                      [routerLink]="['/auth/register']"
+                      [queryParamsHandling]="'preserve'"
+                      routerLinkActive="btn-active"
+                      class="btn btn-outline btn-secondary"
+                    >
+                      Üye ol
+                    </button>
+                  </div>
                 </div>
+
+                <router-outlet />
               </div>
-              <div
-                class="flex items-center rounded-b-lg bg-gray-400 lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
-              >
-                <div class="px-4 py-6 text-white md:mx-6 md:p-12">
-                  <h4 class="mb-6 text-xl font-semibold text-white">
-                    Lorem ipsum dolor sit amet!
-                  </h4>
-                  <p class="text-sm font-semibold">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
-                </div>
+            </div>
+            <div
+              class="flex items-center rounded-b-lg bg-gray-400 lg:w-1/2 lg:rounded-r-lg lg:rounded-bl-none"
+            >
+              <div class="flex flex-row">
+                <img
+                  class="w-full mx-auto justify-center items-center max-lg:contents"
+                  src="assets/images/login_image.png"
+                  alt=""
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
