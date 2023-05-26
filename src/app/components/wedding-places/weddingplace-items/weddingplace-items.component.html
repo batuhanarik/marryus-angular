@@ -1,109 +1,288 @@
-<div class="flex flex-row flex-wrap justify-start">
-  <!-- <div class="h-64 w-full flex flex-row">
-    <div
-      class="container w-full flex flex-row justify-start items-start mx-auto flex-wrap"
-    >
-      <ul
-        class="menu flex flex-row bg-base-100 min-h-52 max-h-56 w-44 max-w-44 h-56 p-2 rounded-box overflow-y-scroll overflow-x-hidden"
-      >
-        <li class="text-amber-600">
-          <a (click)="getWeddingPlaces()">Tüm Şehirler</a>
-        </li>
+<div class="flex-1 justify-center items-center">
+  <form [formGroup]="filterForm">
+    <div class="flex flex-row flex-wrap justify-around">
+      <div class="card flex w-full">
+        <p-accordion id="filterTab" name="filterTab" class="w-full">
+          <p-accordionTab>
+            <ng-template pTemplate="header">
+              <div class="flex align-items-center">
+                <span class="vertical-align-middle"
+                  >Filtrele
+                  <i class="pi pi-search mr-2"></i>
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <!-- Arama Kısmı Kapsayıcı Div -->
+              <div class="flex flex-row justify-between items-start">
+                <!-- Arama Kısmı 1 -->
+                <div class="flex flex-col items-center justify-center w-1/3">
+                  <div class="form-control w-full max-w-xs">
+                    <label class="">
+                      <span class="label-text">Mekan adı giriniz.</span>
+                    </label>
+                    <input
+                      formControlName="placeName"
+                      type="text"
+                      placeholder="Örn : Limon Davet"
+                      class="input input-bordered border-purple-500 w-full max-w-xs"
+                    />
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text">Şehir seçiniz.</span>
+                    </label>
+                    <select
+                      class="select select-bordered"
+                      formControlName="plateCode"
+                    >
+                      <option selected [value]="null">Tüm Şehirler</option>
+                      <option
+                        [value]="city.plateCode"
+                        *ngFor="let city of cities"
+                      >
+                        {{ city.plateName }}
+                      </option>
+                    </select>
+                    <label class="label"> </label>
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text">Kategori seçiniz.</span>
+                    </label>
+                    <select
+                      class="select select-bordered"
+                      formControlName="categoryId"
+                    >
+                      <option [value]="null" selected>Tüm Kategoriler</option>
+                      <option
+                        [value]="category.categoryId"
+                        *ngFor="let category of categories"
+                      >
+                        {{ category.categoryName }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- Arama Kısmı 2 -->
+                <div class="contents">
+                  <div class="">
+                    <div class="flex flex-col">
+                      <div class="flex">
+                        <p-accordion class="mr-1" [activeIndex]="1">
+                          <p-accordionTab header="Engelli girişi">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="hasHandicapEntrance"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                        <p-accordion [activeIndex]="1">
+                          <p-accordionTab header="Hazırlık odası">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="hasPrepRoom"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                      </div>
+                      <div class="flex">
+                        <p-accordion class="mr-1" [activeIndex]="1">
+                          <p-accordionTab header="Yemekli menü  ">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="isFoodIncluded"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                        <p-accordion [activeIndex]="1">
+                          <p-accordionTab header="Kokteylli menü  ">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="isCocktailIncluded"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                      </div>
+                      <div class="flex">
+                        <p-accordion class="mr-1" [activeIndex]="1">
+                          <p-accordionTab header="Olumsuz havaya karşı önlem">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="hasAnyMeasureAgainstAdverseWeatherConditions"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                        <p-accordion [activeIndex]="1">
+                          <p-accordionTab header="Alkollü menü  ">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="isAlcoholIncluded"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                      </div>
 
-        <li class="w-full" *ngFor="let city of cities">
-          <span (click)="getWeddingPlaceDetailsByCity(city.plateCode)">{{
-            city.plateName
-          }}</span>
-        </li>
-      </ul>
-      <div class="flex flex-row justify-center my-2 items-center w-1/2">
-        <label class="label-text mx-1 self-center">Mekan İsmi :</label>
-        <input
-          type="text"
-          [(ngModel)]="filterText"
-          placeholder="Örn : Carmen Wedding House"
-          class="input input-bordered input-md w-full max-w-xs"
-        />
+                      <div class="flex">
+                        <p-accordion class="mr-1" [activeIndex]="1">
+                          <p-accordionTab header="Düğün öncesi yemek tadımı  ">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="hasMenuTasting"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                        <p-accordion [activeIndex]="1">
+                          <p-accordionTab header="Vale hizmeti  ">
+                            <select
+                              class="select select-bordered select-sm w-full max-w-xs"
+                              formControlName="hasValetService"
+                            >
+                              <option [value]="true">Evet</option>
+                              <option [value]="false">Hayır</option>
+                              <option [value]="null" selected>Farketmez</option>
+                            </select>
+                          </p-accordionTab>
+                        </p-accordion>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Arama Kısmı 3 -->
+                <div class="flex flex-col">
+                  <div class="form-control w-full max-w-xs">
+                    <label class="">
+                      <span class="label-text">Fiyat Giriniz (En Az)</span>
+                    </label>
+                    <label class="input-group">
+                      <span class="text-sm">Kişi Başı</span>
+                      <input
+                        formControlName="minPriceWeekday"
+                        type="number"
+                        placeholder="150"
+                        class="input input-bordered"
+                      />
+                      <span>TL</span>
+                    </label>
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text">Fiyat Giriniz (En Çok)</span>
+                    </label>
+                    <label class="input-group">
+                      <span class="text-sm">Kişi Başı</span>
+                      <input
+                        formControlName="maxPriceWeekday"
+                        type="number"
+                        placeholder="400"
+                        class="input input-bordered"
+                      />
+                      <span>TL</span>
+                    </label>
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="">
+                      <span class="label-text"
+                        >Haftasonu için Fiyat Giriniz (En Az)</span
+                      >
+                    </label>
+                    <label class="input-group">
+                      <span class="text-sm">Kişi Başı</span>
+                      <input
+                        formControlName="minPriceWeekend"
+                        type="number"
+                        placeholder="150"
+                        class="input input-bordered"
+                      />
+                      <span>TL</span>
+                    </label>
+                  </div>
+                  <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                      <span class="label-text"
+                        >Haftasonu için Fiyat Giriniz (En Çok)</span
+                      >
+                    </label>
+                    <label class="input-group">
+                      <span class="text-sm">Kişi Başı</span>
+                      <input
+                        type="number"
+                        formControlName="maxPriceWeekend"
+                        placeholder="400"
+                        class="input input-bordered"
+                      />
+                      <span>TL</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="w-4/5 mx-auto flex mt-2">
+                <button
+                  (click)="clearAllFilters()"
+                  class="form-control btn w-1/5 bg-[#A855F7] border-0 mr-2"
+                >
+                  Temizle
+                </button>
+                <button
+                  (click)="getDetailsByFilter()"
+                  class="form-control w-4/5 btn bg-[#b2dfee] text-base text-black border-0"
+                >
+                  Arama Yap
+                </button>
+              </div>
+            </ng-template>
+          </p-accordionTab>
+        </p-accordion>
       </div>
+      <app-wedding-place-item
+        [weddingPlace]="weddingPlace"
+        *ngFor="let weddingPlace of weddingPlaces | filterpipe : filterText"
+      />
     </div>
-  </div> -->
-  <div class="card flex w-full">
-    <p-accordion class="w-full">
-      <p-accordionTab>
-        <ng-template pTemplate="header">
-          <div class="flex align-items-center">
-            <span class="vertical-align-middle"
-              >Filtrele
-              <i class="pi pi-search mr-2"></i>
-            </span>
-          </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-          <div class="flex flex-col items-center justify-center">
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Şehir seçiniz.</span>
-              </label>
-              <select class="select select-bordered">
-                <option selected>Tüm Şehirler</option>
-                <option *ngFor="let city of cities">
-                  {{ city.plateName }}
-                </option>
-              </select>
-              <label class="label"> </label>
-            </div>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Mekan adı giriniz.</span>
-              </label>
-              <input
-                type="text"
-                placeholder="Örn : Limon Davet"
-                class="input input-bordered w-full max-w-xs"
-              />
-            </div>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Fiyat Giriniz (En Az)</span>
-              </label>
-              <label class="input-group">
-                <span class="text-sm">Kişi Başı</span>
-                <input
-                  type="text"
-                  placeholder="150"
-                  class="input input-bordered"
-                />
-                <span>TL</span>
-              </label>
-            </div>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text">Fiyat Giriniz (En Çok)</span>
-              </label>
-              <label class="input-group">
-                <span class="text-sm">Kişi Başı</span>
-                <input
-                  type="text"
-                  placeholder="400"
-                  class="input input-bordered"
-                />
-                <span>TL</span>
-              </label>
-            </div>
-            <button
-              class="form-control btn bg-[#b2dfee] btn-block max-w-xs my-2"
-            >
-              Arama Yap
-            </button>
-          </div>
-        </ng-template>
-      </p-accordionTab>
-    </p-accordion>
-  </div>
-  <app-wedding-place-item
-    [weddingPlace]="weddingPlace"
-    *ngFor="let weddingPlace of weddingPlaces | filterpipe : filterText"
-  />
-
-  <progress *ngIf="loading" class="progress w-56"></progress>
+  </form>
 </div>
+<div
+  class="w-full grid justify-center"
+  *ngIf="!loading && weddingPlaces.length === 0"
+>
+  <img class="w-2/5 mx-auto" src="assets/images/noresult.png" alt="Sonuc Yok" />
+  <div class="card">
+    <p-messages
+      [(value)]="messagesNoResult"
+      [enableService]="false"
+      [closable]="false"
+    ></p-messages>
+  </div>
+</div>
+<progress
+  *ngIf="loading"
+  class="mx-auto my-auto justify-center self-center progress"
+></progress>

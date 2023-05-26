@@ -26,14 +26,39 @@ export class LoginComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+  isFormClicked: boolean = false;
   constructor(
     private _fb: FormBuilder,
     private _service: AuthService,
     private toastrService: ToastrService
   ) {}
 
+  get getControls() {
+    return this.form.controls;
+  }
+
   submit() {
+    this.isFormClicked = true;
     if (this.form.invalid) {
+      if (this.getControls.email.invalid) {
+        Swal.fire({
+          position: 'bottom-end',
+          icon: 'error',
+          title: `Mail adresinizin doğruluğunu kontrol ediniz.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (this.getControls.password.invalid) {
+        Swal.fire({
+          position: 'bottom-end',
+          icon: 'error',
+          title: `Şifre alanı boş geçilemez.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+
+      console.log(this.form.value);
       return;
     }
 
@@ -41,11 +66,10 @@ export class LoginComponent {
       .login(this.form.value as LoginInput)
       .pipe(
         catchError((err) => {
-          console.log(err.error.detail);
           Swal.fire({
             position: 'bottom-end',
             icon: 'error',
-            title: `Hatalı İstek`,
+            title: `${err.error.detail}`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -53,8 +77,8 @@ export class LoginComponent {
         })
       )
       .subscribe((res: any) => {
-        if (res.token !== null) {
-          this.toastrService.success('Giriş Başarılı.');
+        if (res.token) {
+          if (res.token != null) this.toastrService.success('Giriş Başarılı.');
         }
       });
   }

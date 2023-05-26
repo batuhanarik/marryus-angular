@@ -52,9 +52,10 @@ export class UpdateWeddingplaceComponent {
       .subscribe((res: any) => {
         if (res.success) {
           this.weddingPlace = res.data;
-          this.createCarUpdateForm();
+          this.createWeddingPlaceUpdateForm();
           this.getWeddingPlaceImages();
           this.wpLoaded = true;
+          console.log(res.data);
         }
       });
   }
@@ -80,7 +81,7 @@ export class UpdateWeddingplaceComponent {
       this.categoriesLoaded = true;
     });
   }
-  createCarUpdateForm() {
+  createWeddingPlaceUpdateForm() {
     this.weddingPlaceUpdateForm = this.formBuilder.group({
       weddingPlaceId: [this.weddingPlace.weddingPlaceId],
       plateCode: [this.weddingPlace.plateCode, Validators.required],
@@ -90,14 +91,8 @@ export class UpdateWeddingplaceComponent {
       description: [this.weddingPlace.description, Validators.required],
       capacityFirst: [this.weddingPlace.capacityFirst, Validators.required],
       capacityLast: [this.weddingPlace.capacityLast, Validators.required],
-      priceWeekday: [
-        this.weddingPlace.priceWeekday,
-        Validators.required,
-      ],
-      priceWeekend: [
-        this.weddingPlace.priceWeekend,
-        Validators.required,
-      ],
+      priceWeekday: [this.weddingPlace.priceWeekday, Validators.required],
+      priceWeekend: [this.weddingPlace.priceWeekend, Validators.required],
       discountRate: [this.weddingPlace.discountRate, Validators.required],
       isFoodIncluded: [this.weddingPlace.isFoodIncluded, Validators.required],
       isAlcoholIncluded: [

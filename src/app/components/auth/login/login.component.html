@@ -1,24 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="mb-4">
-      <input
-        formControlName="email"
-        type="email"
-        placeholder="Eposta adresi"
-        class="input input-bordered w-full"
-      />
-    </div>
-    <div class="mb-4">
-      <input
-        formControlName="password"
-        type="password"
-        placeholder="Şifre"
-        class="input input-bordered w-full"
-      />
-    </div>
-    <div class="mb-10 pt-1 pb-1 text-center">
-      <button type="submit" class="btn btn-primary mx-auto mb-3 w-full">
-        Giriş yap
-      </button>
-    </div>
-  </form>
-  
+  <div class="mb-4">
+    <input
+      formControlName="email"
+      type="email"
+      placeholder="Eposta adresi"
+      class="input input-bordered w-full"
+    />
+  </div>
+  <div class="mb-4">
+    <input
+      formControlName="password"
+      type="password"
+      placeholder="Şifre"
+      class="input input-bordered w-full"
+    />
+  </div>
+  <div class="mb-10 pt-1 pb-1 text-center">
+    <button type="submit" class="btn btn-primary mx-auto mb-3 w-full">
+      Giriş yap
+    </button>
+  </div>
+</form>

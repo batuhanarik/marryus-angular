@@ -7,6 +7,7 @@ import { WeddingPlaceImage } from '../models/weddingPlaceImage';
 import { ResponseModel } from '../models/responseModel';
 import { ObjectResponseModel } from '../models/objectResponseModel';
 import { WeddingPlaceDetailDto } from '../models/weddingPlaceDetailDto';
+import { FilterOptions } from '../models/filterOptions';
 
 @Injectable({
   providedIn: 'root',
@@ -57,6 +58,15 @@ export class WeddingplaceService {
   ): Observable<ListResponseModel<WeddingPlaceDetailDto>> {
     return this._http.get<ListResponseModel<WeddingPlaceDetailDto>>(
       this.weddingPlacesUrl + '/getdetailsbycity?id=' + id
+    );
+  }
+
+  getDetailsByFilter(
+    filterOptions: FilterOptions
+  ): Observable<ListResponseModel<WeddingPlaceDetailDto>> {
+    return this._http.post<ListResponseModel<WeddingPlaceDetailDto>>(
+      this.weddingPlacesUrl + '/getdetailsbyfilter',
+      filterOptions
     );
   }
 
