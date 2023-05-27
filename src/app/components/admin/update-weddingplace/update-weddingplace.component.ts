@@ -65,6 +65,7 @@ export class UpdateWeddingplaceComponent {
       .subscribe((res: any) => {
         if (res.success) {
           this.images = res.data;
+          console.log(this.images);
           this.imagesLoaded = true;
         }
       });
@@ -160,7 +161,7 @@ export class UpdateWeddingplaceComponent {
           this.toastrService.success(result.message);
           this.getWeddingPlaceImages();
         } else {
-          console.log(result);
+          this.toastrService.success(result.message);
         }
       });
   }

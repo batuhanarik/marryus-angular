@@ -19,6 +19,7 @@
           <div class="text-center">
             <button
               pButton
+              [disabled]="image.placePhotoId == 0"
               class="p-button-danger"
               label="Sil"
               (click)="deleteImage(image)"
@@ -70,8 +71,6 @@
         ></p-dropdown>
       </div>
 
-
-
       <div class="col-4 mt-2">
         <h5>Haftaiçi Fiyat</h5>
         <span class="p-float-label mt-1">
@@ -99,7 +98,6 @@
           />
         </span>
       </div>
-
     </div>
     <!-- Maksimum Kapasiite -->
     <div class="sm:col-span-3">
