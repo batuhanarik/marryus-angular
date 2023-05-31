@@ -30,16 +30,7 @@
 
 <div *ngIf="confirmed" class="items-end-end">
   <div class="row text-center">
-    <a>{{
-      "Renting " +
-        config.data.brandName +
-        " " +
-        config.data.model +
-        " for " +
-        "1 gecelik kiralama fiyatı :" +
-        totalRentPrice +
-        "TL"
-    }}</a>
+    <a>{{ "1 gecelik kiralama fiyatı :" + totalRentPrice + "TL" }}</a>
   </div>
   <form [formGroup]="creditCardForm">
     <div class="p-fluid formgrid grid">

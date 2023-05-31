@@ -35,9 +35,9 @@ export class WeddingplaceRentComponent implements OnInit {
     this.today.setHours(0, 0, 0, 0);
 
     this.maxDate = new Date();
-    this.maxDate.setDate(this.today.getDate() + 30); //Maksimum seçebileceği tarihi belirtir (1 ay sonrasına kadar)
+    this.maxDate.setDate(this.today.getDate() + 90); //Maksimum seçebileceği tarihi belirtir (1 ay sonrasına kadar)
 
-    this.maxReturnDate = new Date(); //Dönüş tarihi : aynı gün olacak.
+    this.maxReturnDate = new Date();
     this.getOccupiedDates();
     this.createCreditCardForm();
     console.log(this.config.data);
@@ -56,6 +56,7 @@ export class WeddingplaceRentComponent implements OnInit {
   }
 
   rentDaySelect(event: any) {
+    console.log(event);
     this.returnDate = undefined; // resets the return date to prevent bugs
     let i = 0;
     for (; i < this.occupiedDates.length; i++) {
@@ -63,11 +64,11 @@ export class WeddingplaceRentComponent implements OnInit {
     }
     if (i == this.occupiedDates.length) {
       this.maxReturnDate = new Date();
-      this.maxDate.setHours(23, 59, 59, 59); //kontrol et
+      this.maxDate.setHours(0, 0, 0, 0); //kontrol et
       return;
     }
     this.maxReturnDate = new Date(this.occupiedDates[i]);
-    this.maxReturnDate.setDate(this.maxReturnDate.getDate() - 1);
+    this.maxReturnDate.setDate(this.maxReturnDate.getDate());
   }
 
   next() {
@@ -75,25 +76,19 @@ export class WeddingplaceRentComponent implements OnInit {
       this.toastrService.error('Lütfen tarih seçiniz.');
     } else if (this.rentDate.getTime() == this.today.getTime()) {
       this.toastrService.error('Bugün kiralama işlemi yapılamaz!');
-    }
-    //  else if (!this.returnDate) {
-    //   this.toastrService.error('Please select return date.');
-    // }
-    else {
+    } else {
+      // this.rentDate.setDate(this.rentDate.getDate() + 1 );
+      this.rentDate.setHours(0, 0, 0, 0);
       this.returnDate = this.rentDate;
       this.confirmed = true;
       this.totalRentPrice = 50000;
-      console.log(this.totalRentPrice);
+      console.log(this.rentDate);
     }
   }
   back() {
     this.confirmed = false;
   }
   confirm() {
-    if (!this.returnDate) {
-      this.toastrService.error('Please select a valid return date');
-      return;
-    }
     let date = this.creditCardForm.value.date.split('/');
     let card: CreditCard = {
       cardHolderName: this.creditCardForm.value.cardHolderName,
@@ -112,12 +107,15 @@ export class WeddingplaceRentComponent implements OnInit {
     };
 
     this.rentalService.rent(rental, card).subscribe((result) => {
-      if (result.success) {
-        this.toastrService.success(result.message);
-        this.ref.close();
-      } else {
-        this.toastrService.error(result.message);
-      }
+      this.toastrService.info('Ödeme alınıyor, lütfen bekleyiniz...');
+      setTimeout(() => {
+        if (result.success) {
+          this.toastrService.success(result.message);
+          this.ref.close();
+        } else {
+          this.toastrService.error(result.message);
+        }
+      }, 3000);
     });
   }
   createCreditCardForm() {
