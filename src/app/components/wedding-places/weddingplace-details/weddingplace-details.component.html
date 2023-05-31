@@ -22,6 +22,35 @@
     </ng-template>
   </p-galleria>
 
+  <!-- Telefon -->
+  <div>
+    <div class="chat chat-start mb-3">
+      <div class="chat-bubble bg-cyan-500">Fiyatlarınız Nedir ?</div>
+    </div>
+
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        <p>
+          Haftaiçi Fiyatımız
+          <b class="text-purple-700">{{ currentWeddingPlace.priceWeekday }}</b>
+          TL'dir.
+        </p>
+        <p>
+          Haftasonu Fiyatımız ise
+          <b class="text-purple-700">{{ currentWeddingPlace.priceWeekend }}</b>
+          TL'dir.
+        </p>
+      </div>
+    </div>
+
+    <div class="chat chat-end mb-3">
+      <div class="chat-bubble bg-cyan-500">
+        Fiyatlarımız yemek, alkol, kokteyl vb. seçeneklere göre değişiklik
+        gösterebilmektedir.
+      </div>
+    </div>
+  </div>
+
   <!-- Açık Adres -->
   <div>
     <div class="chat chat-start mb-3">
@@ -188,7 +217,10 @@
     ></textarea>
   </div>
   <div class="flex justify-center items-center">
-    <button class="btn w-1/6 max-md:w-1/3 mx-auto my-2 bg-cyan-500 border-0">
+    <button
+      (click)="rent(currentWeddingPlace)"
+      class="btn w-1/6 max-md:w-1/3 mx-auto my-2 bg-cyan-500 border-0"
+    >
       Devam Et
     </button>
   </div>

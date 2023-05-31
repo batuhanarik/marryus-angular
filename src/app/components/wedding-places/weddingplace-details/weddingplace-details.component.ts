@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {WeddingplaceService} from "../../../services/weddingplace.service";
+import { ActivatedRoute } from '@angular/router';
+import { WeddingplaceService } from '../../../services/weddingplace.service';
+import { WeddingPlaceDetailDto } from '../../../models/weddingPlaceDetailDto';
+import { Dialog } from 'primeng/dialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { WeddingplaceRentComponent } from '../weddingplace-rent/weddingplace-rent.component';
 
 @Component({
   selector: 'app-weddingplace-details',
   templateUrl: './weddingplace-details.component.html',
+  providers: [DialogService],
 })
 export class WeddingplaceDetailsComponent {
-
-  currentWeddingPlace: any;
+  currentWeddingPlace: WeddingPlaceDetailDto;
   wpLoaded: boolean = false;
 
   rentDate: string = '';
@@ -17,10 +21,12 @@ export class WeddingplaceDetailsComponent {
   responsiveOptions: any[];
 
   minDate: Date;
+  ref: DynamicDialogRef;
 
   constructor(
     public activatedRoute: ActivatedRoute,
-    private weddingPlaceService: WeddingplaceService
+    private weddingPlaceService: WeddingplaceService,
+    private dialog: DialogService
   ) {}
 
   ngOnInit() {
@@ -58,4 +64,12 @@ export class WeddingplaceDetailsComponent {
       });
   }
 
+  rent(weddingPlace: WeddingPlaceDetailDto) {
+    this.ref = this.dialog.open(WeddingplaceRentComponent, {
+      header: 'Düğün Yerini Kirala',
+      width: '70%',
+      contentStyle: { overflow: 'auto' },
+      data: weddingPlace,
+    });
+  }
 }

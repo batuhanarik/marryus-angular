@@ -1,0 +1,107 @@
+<div *ngIf="!confirmed" class="grid">
+  <div class="col-span-6">
+    <div class="text-center"><b>Tarih Seçiniz.</b></div>
+    <div *ngIf="occupiedDatesLoaded" class="flex justify-center">
+      <p-calendar
+        class="ml-2"
+        (onSelect)="rentDaySelect($event)"
+        [(ngModel)]="rentDate"
+        [showOtherMonths]="true"
+        [disabled]="confirmed"
+        [readonlyInput]="true"
+        [inline]="true"
+        inputId="rentDate"
+        [minDate]="today"
+        [maxDate]="maxDate"
+        [disabledDates]="occupiedDates"
+      ></p-calendar>
+    </div>
+    <div class="flex justify-end">
+      <button
+        pButton
+        type="button"
+        label="Next"
+        class="p-button-outlined p-button-rounded"
+        (click)="next()"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="confirmed" class="items-end-end">
+  <div class="row text-center">
+    <a>{{
+      "Renting " +
+        config.data.brandName +
+        " " +
+        config.data.model +
+        " for " +
+        "1 gecelik kiralama fiyatı :" +
+        totalRentPrice +
+        "TL"
+    }}</a>
+  </div>
+  <form [formGroup]="creditCardForm">
+    <div class="p-fluid formgrid grid">
+      <div class="col-span-12 flex flex-col">
+        <label id="name" for="cardHolderName">Kart Sahibinin Adı</label>
+        <input
+          type="text"
+          placeholder="Batuhan ARIK"
+          formControlName="cardHolderName"
+          class="input input-bordered input-primary w-full block"
+        />
+      </div>
+      <div class="flex flex-row">
+        <div class="col-span-8">
+          <label id="number" for="cardNumber">Kart Numarası</label>
+          <p-inputMask
+            formControlName="cardNumber"
+            inputId="number"
+            mask="9999-9999-9999-9999"
+          ></p-inputMask>
+        </div>
+        <div class="flex flex-row">
+          <div class="col-span-2">
+            <label id="date" for="date">Tarih</label>
+            <p-inputMask
+              inputId="date"
+              mask="99/99"
+              formControlName="date"
+            ></p-inputMask>
+          </div>
+          <div class="col-span-2">
+            <label for="cvc">CVC</label>
+            <p-inputMask
+              inputId="cvc"
+              mask="999"
+              formControlName="cvc"
+            ></p-inputMask>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="flex justify-between mt-5">
+    <div class="col-auto">
+      <button
+        pButton
+        type="button"
+        label="Back"
+        class="p-button-outlined p-button-rounded"
+        (click)="back()"
+      ></button>
+    </div>
+
+    <div class="col-auto">
+      <button
+        [disabled]="creditCardForm.invalid"
+        pButton
+        type="button"
+        label="Confirm"
+        class="p-button-outlined p-button-rounded"
+        (click)="confirm()"
+      ></button>
+    </div>
+  </div>
+</div>

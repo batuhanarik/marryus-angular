@@ -47,10 +47,12 @@ import { ListboxModule } from 'primeng/listbox';
 import { CalendarModule } from 'primeng/calendar';
 import { MessagesModule } from 'primeng/messages';
 import { NzResultModule } from 'ng-zorro-antd/result';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { InputMaskModule } from 'primeng/inputmask';
 import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
 import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
+import { WeddingplaceRentComponent } from './components/wedding-places/weddingplace-rent/weddingplace-rent.component';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -74,6 +76,7 @@ const ngZorroConfig: NzConfig = {
     WeddingplaceDetailComponent,
     WeddingplaceItemsComponent,
     WeddingplaceDetailsComponent,
+    WeddingplaceRentComponent,
   ],
   imports: [
     CommonModule,
@@ -105,6 +108,8 @@ const ngZorroConfig: NzConfig = {
     CalendarModule,
     MessagesModule,
     NzResultModule,
+    NzModalModule,
+    InputMaskModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

@@ -7,6 +7,7 @@ import { ApiImagePipe } from 'src/app/pipes/api-image.pipe';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
 import { UpdateWeddingplaceComponent } from '../admin/update-weddingplace/update-weddingplace.component';
 import { WeddingPlace } from 'src/app/models/weddingPlace';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-home-admin',
@@ -23,7 +24,7 @@ export class HomeAdminComponent {
     private dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private toastrService: ToastrService,
-    private apiimagePipe: ApiImagePipe
+    private modal: NzModalService
   ) {}
 
   ngOnInit() {
@@ -49,6 +50,15 @@ export class HomeAdminComponent {
         }
       });
   }
+
+  showConfirm(weddingPlace: WeddingPlaceDetailDto): void {
+    this.modal.confirm({
+      nzTitle: '<i>Düğün yerinizi silmek istiyor musunuz?</i>',
+      nzContent: '',
+      nzOnOk: () => this.deleteWeddingPlace(weddingPlace),
+    });
+  }
+
   editWeddingPlace(weddingPlace: WeddingPlaceDetailDto) {
     this.ref = this.dialogService.open(UpdateWeddingplaceComponent, {
       header: 'Düğün Yeri Güncelle',
