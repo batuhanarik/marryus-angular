@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -16,19 +21,26 @@ export class WeddingplaceRentComponent implements OnInit {
   returnDate: Date;
   occupiedDates: Date[];
   occupiedDatesLoaded = false;
+  selectedDate: boolean = false;
+  selectedCapacity: number = this.config.data.capacityFirst;
   confirmed = false;
   today: Date;
   maxDate: Date;
   maxReturnDate: Date;
-  totalRentPrice: number;
+  weddingPlacePrice: number = 0;
   creditCardForm: FormGroup;
+  isAlcoholIncluded = false;
+  isFoodIncluded = false;
+  isCocktailIncluded = false;
+  totalRentPrice: number = this.weddingPlacePrice * this.selectedCapacity;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private rentalService: RentalService,
     private toastrService: ToastrService,
     public config: DynamicDialogConfig,
-    public ref: DynamicDialogRef
+    public ref: DynamicDialogRef,
+    private cdr: ChangeDetectorRef
   ) {}
   ngOnInit(): void {
     this.today = new Date();
@@ -41,6 +53,7 @@ export class WeddingplaceRentComponent implements OnInit {
     this.getOccupiedDates();
     this.createCreditCardForm();
     console.log(this.config.data);
+    this.calculateRentPrice();
   }
 
   getOccupiedDates() {
@@ -70,6 +83,22 @@ export class WeddingplaceRentComponent implements OnInit {
     this.maxReturnDate = new Date(this.occupiedDates[i]);
     this.maxReturnDate.setDate(this.maxReturnDate.getDate());
   }
+  calculateRentPrice() {
+    let additionalPrice = 0;
+    let rentPrice = this.weddingPlacePrice * this.selectedCapacity;
+    if (this.isAlcoholIncluded) {
+      additionalPrice += this.config.data.priceAlcohol * this.selectedCapacity;
+    }
+    if (this.isFoodIncluded) {
+      additionalPrice += additionalPrice +=
+        this.config.data.priceFood * this.selectedCapacity;
+    }
+    if (this.isCocktailIncluded) {
+      additionalPrice += this.config.data.priceCocktail * this.selectedCapacity;
+    }
+    this.totalRentPrice = rentPrice + additionalPrice;
+    this.cdr.detectChanges();
+  }
 
   next() {
     if (!this.rentDate) {
@@ -80,9 +109,11 @@ export class WeddingplaceRentComponent implements OnInit {
       // this.rentDate.setDate(this.rentDate.getDate() + 1 );
       this.rentDate.setHours(0, 0, 0, 0);
       this.returnDate = this.rentDate;
-      this.confirmed = true;
-      this.totalRentPrice = 50000;
-      console.log(this.rentDate);
+      this.selectedDate = true;
+      const isWeekend = this.isRentDayWeekend(this.rentDate);
+      this.weddingPlacePrice = isWeekend
+        ? this.config.data.priceWeekend
+        : this.config.data.priceWeekday;
     }
   }
   back() {
@@ -118,6 +149,21 @@ export class WeddingplaceRentComponent implements OnInit {
       }, 3000);
     });
   }
+  isRentDayWeekend(rent: Date) {
+    let dayOfWeek = rent.getDay();
+    let isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    return isWeekend;
+  }
+  alcoholIncluded() {
+    this.isAlcoholIncluded = !this.isAlcoholIncluded;
+  }
+  cocktailIncluded() {
+    this.isCocktailIncluded = !this.isCocktailIncluded;
+  }
+  foodIncluded() {
+    this.isFoodIncluded = !this.isFoodIncluded;
+  }
+
   createCreditCardForm() {
     this.creditCardForm = this.formBuilder.group({
       cardHolderName: ['', [Validators.required]],

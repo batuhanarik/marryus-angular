@@ -1,4 +1,4 @@
-<div *ngIf="!confirmed" class="grid">
+<div *ngIf="!confirmed && !selectedDate" class="grid">
   <div class="col-span-6">
     <div class="text-center"><b>Tarih Seçiniz.</b></div>
     <div *ngIf="occupiedDatesLoaded" class="flex justify-center">
@@ -93,6 +93,105 @@
         class="p-button-outlined p-button-rounded"
         (click)="confirm()"
       ></button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedDate">
+  <h2>Tercihlerinizi belirtir misiniz?</h2>
+  <div class="flex flex-row col-span-12">
+    <div class="sm:col-span-6">
+      <div class="w-full">
+        <!-- Alkol Var Mı -->
+        <div class="form-control !flex-row">
+          <label class="label cursor-pointer">
+            <input
+              [disabled]="!config.data.isAlcoholIncluded"
+              [(ngModel)]="isAlcoholIncluded"
+              type="checkbox"
+              class="checkbox"
+            />
+            <span
+              class="label-text mx-3"
+              [ngClass]="!config.data.isAlcoholIncluded ? 'line-through' : ''"
+              >Düğün yerinde alkol hizmeti var mı?</span
+            >
+          </label>
+        </div>
+        <!-- Yemek Var Mı -->
+        <div class="form-control !flex-row">
+          <label class="label cursor-pointer">
+            <input
+              [disabled]="!config.data.isFoodIncluded"
+              type="checkbox"
+              class="checkbox"
+              [(ngModel)]="isFoodIncluded"
+            />
+            <span
+              class="label-text mx-3"
+              [ngClass]="!config.data.isFoodIncluded ? 'line-through' : ''"
+              >Düğün yerinde yemek hizmeti var mı?</span
+            >
+          </label>
+        </div>
+        <!-- Kokteyl Var Mı -->
+        <div class="form-control !flex-row">
+          <label class="label cursor-pointer">
+            <input
+              [disabled]="!config.data.isCocktailIncluded"
+              [(ngModel)]="isCocktailIncluded"
+              type="checkbox"
+              class="checkbox"
+            />
+            <span
+              class="label-text mx-3"
+              [ngClass]="!config.data.isCocktailIncluded ? 'line-through' : ''"
+              >Düğün yerindeki kokteyl var mı?</span
+            >
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row justify-between">
+    <div class="flex justify-end items-center">
+      <div class="sm:col-span-3">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text font-semibold"
+              >Düğün kapasitesi {{ config.data.capacityFirst }} -
+              {{ config.data.capacityLast }} Aralığında olmalıdır.</span
+            >
+          </label>
+          <label class="input-group">
+            <input
+              type="number"
+              [(ngModel)]="selectedCapacity"
+              [min]="config.data.capacityFirst"
+              [max]="config.data.capacityLast"
+              step="10"
+              class="input input-bordered"
+            />
+            <span>Kişi</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end items-center">
+      <div class="avatar placeholder w-23 font-medium text-black">
+        <div class="bg-neutral-focus text-neutral-content rounded-full w-24">
+          <span class="text-xl">{{
+            weddingPlacePrice * selectedCapacity +
+              (isFoodIncluded ? config.data.priceFood * selectedCapacity : 0) +
+              (isAlcoholIncluded
+                ? config.data.priceAlcohol * selectedCapacity
+                : 0) +
+              (isCocktailIncluded
+                ? config.data.priceCocktail * selectedCapacity
+                : 0)
+          }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

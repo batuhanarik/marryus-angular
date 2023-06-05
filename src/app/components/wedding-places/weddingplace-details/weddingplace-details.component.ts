@@ -67,7 +67,7 @@ export class WeddingplaceDetailsComponent {
   rent(weddingPlace: WeddingPlaceDetailDto) {
     this.ref = this.dialog.open(WeddingplaceRentComponent, {
       header: 'Düğün Yerini Kirala',
-      width: '70%',
+      width: '50%',
       contentStyle: { overflow: 'auto' },
       data: weddingPlace,
     });

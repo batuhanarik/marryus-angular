@@ -14,6 +14,9 @@ export interface WeddingPlaceDetailDto {
   capacityLast: number;
   priceWeekday: number;
   priceWeekend: number;
+  priceAlcohol: number;
+  priceFood: number;
+  priceCocktail: number;
   discountRate: number;
   isAlcoholIncluded: boolean;
   isFoodIncluded: boolean;

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PrimaryLayoutComponent {
   fullName: string = '';
-  isSidebarVisible = true;
+  isSidebarVisible = false;
   constructor(
     private _iconService: NzIconService,
     private authService: AuthService
