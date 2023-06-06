@@ -38,8 +38,7 @@ export class WeddingplaceItemsComponent {
     private weddingPlaceService: WeddingplaceService,
     private cityService: CityService,
     private categoryService: CategoryService,
-    private formBuilder: FormBuilder,
-    private cdrRef: ChangeDetectorRef
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
