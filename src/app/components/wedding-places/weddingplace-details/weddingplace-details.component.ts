@@ -5,7 +5,8 @@ import { WeddingPlaceDetailDto } from '../../../models/weddingPlaceDetailDto';
 import { Dialog } from 'primeng/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WeddingplaceRentComponent } from '../weddingplace-rent/weddingplace-rent.component';
-
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-weddingplace-details',
   templateUrl: './weddingplace-details.component.html',
@@ -14,6 +15,7 @@ import { WeddingplaceRentComponent } from '../weddingplace-rent/weddingplace-ren
 export class WeddingplaceDetailsComponent {
   currentWeddingPlace: WeddingPlaceDetailDto;
   wpLoaded: boolean = false;
+  isMobileDevice: boolean = false;
 
   rentDate: string = '';
   returnDate: string = '';
@@ -26,10 +28,27 @@ export class WeddingplaceDetailsComponent {
   constructor(
     public activatedRoute: ActivatedRoute,
     private weddingPlaceService: WeddingplaceService,
-    private dialog: DialogService
+    private dialog: DialogService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      // Tarayıcı ortamında çalışıyoruz
+      const isMobile =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+      // Yukarıdaki ifade ile cihazın telefon olup olmadığını kontrol edebilirsiniz
+      if (isMobile) {
+        console.log('Mobil Cihaz');
+        this.isMobileDevice = true;
+      } else {
+        // Masaüstü içeriği
+        console.log('değil');
+        this.isMobileDevice = false;
+      }
+    }
     this.activatedRoute.paramMap.subscribe((params) => {
       let id = +this.activatedRoute.snapshot.paramMap.get('weddingPlaceId');
       this.getCurrentWeddingPlace(id);
@@ -51,6 +70,7 @@ export class WeddingplaceDetailsComponent {
     ];
 
     window.scrollTo(0, 0);
+    console.log(this.isMobileDevice);
   }
 
   getCurrentWeddingPlace(wpId: number) {

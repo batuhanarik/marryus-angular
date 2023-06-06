@@ -28,9 +28,12 @@
   </div>
 </div>
 
-<div *ngIf="confirmed" class="items-end-end">
+<div *ngIf="confirmed && !parametersModal" class="items-end-end">
   <div class="row text-center">
-    <a>{{ "1 gecelik kiralama fiyatı :" + totalRentPrice + "TL" }}</a>
+    <a
+      >"Düğün yerinizin toplam kiralama fiyatı :
+      <b>{{ totalRentPrice }}</b> TL</a
+    >
   </div>
   <form [formGroup]="creditCardForm">
     <div class="p-fluid formgrid grid">
@@ -74,22 +77,14 @@
     </div>
   </form>
   <div class="flex justify-between mt-5">
-    <div class="col-auto">
-      <button
-        pButton
-        type="button"
-        label="Back"
-        class="p-button-outlined p-button-rounded"
-        (click)="back()"
-      ></button>
-    </div>
+    <div class="col-auto"></div>
 
     <div class="col-auto">
       <button
         [disabled]="creditCardForm.invalid"
         pButton
         type="button"
-        label="Confirm"
+        label="Öde"
         class="p-button-outlined p-button-rounded"
         (click)="confirm()"
       ></button>
@@ -97,7 +92,7 @@
   </div>
 </div>
 
-<div *ngIf="selectedDate">
+<div *ngIf="selectedDate && parametersModal">
   <h2>Tercihlerinizi belirtir misiniz?</h2>
   <div class="flex flex-row col-span-12">
     <div class="sm:col-span-6">
@@ -108,6 +103,7 @@
             <input
               [disabled]="!config.data.isAlcoholIncluded"
               [(ngModel)]="isAlcoholIncluded"
+              (ngModelChange)="calculateRentPrice()"
               type="checkbox"
               class="checkbox"
             />
@@ -126,6 +122,7 @@
               type="checkbox"
               class="checkbox"
               [(ngModel)]="isFoodIncluded"
+              (ngModelChange)="calculateRentPrice()"
             />
             <span
               class="label-text mx-3"
@@ -140,6 +137,7 @@
             <input
               [disabled]="!config.data.isCocktailIncluded"
               [(ngModel)]="isCocktailIncluded"
+              (ngModelChange)="calculateRentPrice()"
               type="checkbox"
               class="checkbox"
             />
@@ -167,6 +165,7 @@
             <input
               type="number"
               [(ngModel)]="selectedCapacity"
+              (ngModelChange)="calculateRentPrice()"
               [min]="config.data.capacityFirst"
               [max]="config.data.capacityLast"
               step="10"
@@ -174,24 +173,26 @@
             />
             <span>Kişi</span>
           </label>
+          <span *ngIf="config.data.discountRate > 0" class="text-lg"
+            >İndirim Oranı :
+            <span class="text-xl text-fuchsia-700 font-bold">
+              %{{ config.data.discountRate }}
+            </span></span
+          >
         </div>
       </div>
     </div>
-    <div class="flex justify-end items-center">
-      <div class="avatar placeholder w-23 font-medium text-black">
+    <div class="block justify-end items-center">
+      <div
+        class="avatar placeholder w-23 font-medium text-black flex mb-2 justify-end"
+      >
         <div class="bg-neutral-focus text-neutral-content rounded-full w-24">
-          <span class="text-xl">{{
-            weddingPlacePrice * selectedCapacity +
-              (isFoodIncluded ? config.data.priceFood * selectedCapacity : 0) +
-              (isAlcoholIncluded
-                ? config.data.priceAlcohol * selectedCapacity
-                : 0) +
-              (isCocktailIncluded
-                ? config.data.priceCocktail * selectedCapacity
-                : 0)
-          }}</span>
+          <span class="text-xl">{{ totalRentPrice }} TL</span>
         </div>
       </div>
+      <button (click)="goToPayment()" class="btn btn-primary flex">
+        Ödemeye Geç
+      </button>
     </div>
   </div>
 </div>

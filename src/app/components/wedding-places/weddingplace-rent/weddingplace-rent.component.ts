@@ -33,6 +33,7 @@ export class WeddingplaceRentComponent implements OnInit {
   isFoodIncluded = false;
   isCocktailIncluded = false;
   totalRentPrice: number = this.weddingPlacePrice * this.selectedCapacity;
+  parametersModal = false;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -53,7 +54,6 @@ export class WeddingplaceRentComponent implements OnInit {
     this.getOccupiedDates();
     this.createCreditCardForm();
     console.log(this.config.data);
-    this.calculateRentPrice();
   }
 
   getOccupiedDates() {
@@ -84,20 +84,25 @@ export class WeddingplaceRentComponent implements OnInit {
     this.maxReturnDate.setDate(this.maxReturnDate.getDate());
   }
   calculateRentPrice() {
-    let additionalPrice = 0;
     let rentPrice = this.weddingPlacePrice * this.selectedCapacity;
     if (this.isAlcoholIncluded) {
-      additionalPrice += this.config.data.priceAlcohol * this.selectedCapacity;
+      rentPrice += this.config.data.priceAlcohol * this.selectedCapacity;
     }
     if (this.isFoodIncluded) {
-      additionalPrice += additionalPrice +=
-        this.config.data.priceFood * this.selectedCapacity;
+      rentPrice += this.config.data.priceFood * this.selectedCapacity;
     }
     if (this.isCocktailIncluded) {
-      additionalPrice += this.config.data.priceCocktail * this.selectedCapacity;
+      rentPrice += this.config.data.priceCocktail * this.selectedCapacity;
     }
-    this.totalRentPrice = rentPrice + additionalPrice;
-    this.cdr.detectChanges();
+    this.totalRentPrice = rentPrice;
+    console.log(this.totalRentPrice);
+
+    console.log(this.selectedCapacity);
+    console.log(this.config.data.priceFood);
+
+    if (this.config.data.discountRate > 0) {
+      this.totalRentPrice -= (this.config.data.discountRate * rentPrice) / 100;
+    }
   }
 
   next() {
@@ -106,7 +111,6 @@ export class WeddingplaceRentComponent implements OnInit {
     } else if (this.rentDate.getTime() == this.today.getTime()) {
       this.toastrService.error('Bugün kiralama işlemi yapılamaz!');
     } else {
-      // this.rentDate.setDate(this.rentDate.getDate() + 1 );
       this.rentDate.setHours(0, 0, 0, 0);
       this.returnDate = this.rentDate;
       this.selectedDate = true;
@@ -115,9 +119,16 @@ export class WeddingplaceRentComponent implements OnInit {
         ? this.config.data.priceWeekend
         : this.config.data.priceWeekday;
     }
+    this.calculateRentPrice();
+    this.parametersModal = true;
   }
   back() {
     this.confirmed = false;
+  }
+  goToPayment() {
+    // this.isParametersSelected = true;
+    this.confirmed = true;
+    this.parametersModal = false;
   }
   confirm() {
     let date = this.creditCardForm.value.date.split('/');

@@ -101,9 +101,9 @@
     </div>
     <!-- Maksimum Kapasiite -->
     <div class="sm:col-span-3">
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label">
-          <span class="label-text font-semibold">İlk Kapasite</span>
+          <span class="label-text ml-2 font-semibold">İlk Kapasite</span>
         </label>
         <label class="input-group">
           <input
@@ -124,7 +124,7 @@
     <div class="sm:col-span-3">
       <div class="form-control">
         <label class="label">
-          <span class="label-text font-semibold">Son Kapasite</span>
+          <span class="label-text ml-2 font-semibold">Son Kapasite</span>
         </label>
         <label class="input-group">
           <input
@@ -145,7 +145,7 @@
     <div class="sm:col-span-3">
       <div class="form-control">
         <label class="label">
-          <span class="label-text font-semibold">İndirim Oranı</span>
+          <span class="label-text ml-2 font-semibold">İndirim Oranı</span>
         </label>
         <label class="input-group">
           <input
@@ -221,91 +221,102 @@
         />
       </div>
     </div>
-    <div class="w-full">
+    <div class="w-full justify-start">
       <!-- Alkol Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text">Düğün yerinde alkol hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="isAlcoholIncluded"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün yerinde alkol hizmeti var mı?</span
+          >
         </label>
       </div>
       <!-- Yemek Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text">Düğün yerinde yemek hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="isFoodIncluded"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün yerinde yemek hizmeti var mı?</span
+          >
         </label>
       </div>
 
       <!-- Kokteyl Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text">Düğün yerinde kokteyl hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="isCocktailIncluded"
             class="checkbox"
           />
+
+          <span class="label-text ml-2"
+            >Düğün yerinde kokteyl hizmeti var mı?</span
+          >
         </label>
       </div>
 
       <!-- Vale Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text">Düğün yerinde vale hizmeti var mı?</span>
           <input
             type="checkbox"
             formControlName="hasValetService"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün yerinde vale hizmeti var mı?</span
+          >
         </label>
       </div>
 
       <!-- Menü Tadım Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text"
-            >Düğün öncesi menü tadım hizmeti var mı?</span
-          >
           <input
             type="checkbox"
             formControlName="hasMenuTasting"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün öncesi menü tadım hizmeti var mı?</span
+          >
         </label>
       </div>
 
       <!-- Hava Koşullarına Önlem Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text"
-            >Düğün yerinde olumsuz hava koşullarına karşı önlem var mı?</span
-          >
           <input
             type="checkbox"
             formControlName="hasAnyMeasureAgainstAdverseWeatherConditions"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün yerinde olumsuz hava koşullarına karşı önlem var mı?</span
+          >
         </label>
       </div>
 
       <!-- Hazırlık Odası Var Mı -->
-      <div class="form-control">
+      <div class="form-control items-baseline">
         <label class="label cursor-pointer">
-          <span class="label-text">Düğün yerinde hazırlık odası var mı?</span>
           <input
             type="checkbox"
             formControlName="hasPrepRoom"
             class="checkbox"
           />
+          <span class="label-text ml-2"
+            >Düğün yerinde hazırlık odası var mı?</span
+          >
         </label>
       </div>
     </div>
