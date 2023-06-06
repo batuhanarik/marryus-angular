@@ -1,8 +1,10 @@
 export interface RentalDetailDto {
   id: number;
-  brandName: string;
-  model: string;
+  placeName: string;
+  categoryName: string;
+  plateName: string;
   customerName: string;
   rentDate: Date;
   returnDate: Date;
+  rentPrice: number;
 }

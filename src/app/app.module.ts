@@ -53,6 +53,9 @@ import { WeddingplaceDetailComponent } from './components/wedding-places/wedding
 import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
 import { WeddingplaceRentComponent } from './components/wedding-places/weddingplace-rent/weddingplace-rent.component';
+import { RentalsComponent } from './components/admin/rentals/rentals.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
@@ -77,6 +80,7 @@ const ngZorroConfig: NzConfig = {
     WeddingplaceItemsComponent,
     WeddingplaceDetailsComponent,
     WeddingplaceRentComponent,
+    RentalsComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +114,8 @@ const ngZorroConfig: NzConfig = {
     NzResultModule,
     NzModalModule,
     InputMaskModule,
+    NzTableModule,
+    NzDividerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

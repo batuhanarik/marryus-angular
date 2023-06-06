@@ -8,6 +8,7 @@ import { ResponseModel } from '../models/responseModel';
 import { ObjectResponseModel } from '../models/objectResponseModel';
 import { WeddingPlaceDetailDto } from '../models/weddingPlaceDetailDto';
 import { FilterOptions } from '../models/filterOptions';
+import { WeddingPlaceStats } from '../models/weddingPlaceStats';
 
 @Injectable({
   providedIn: 'root',
@@ -115,6 +116,13 @@ export class WeddingplaceService {
     return this._http.post<ResponseModel>(
       this.weddingPlaceImagesUrl + '/delete',
       image
+    );
+  }
+  getWeddingPlaceStats(
+    wpId: number
+  ): Observable<ObjectResponseModel<WeddingPlaceStats>> {
+    return this._http.get<ObjectResponseModel<WeddingPlaceStats>>(
+      this.weddingPlacesUrl + '/getwpstats?wpId=' + wpId
     );
   }
 }

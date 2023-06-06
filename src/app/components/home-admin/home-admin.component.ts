@@ -71,4 +71,18 @@ export class HomeAdminComponent {
       this.getWeddingPlaces();
     });
   }
+
+  getWeddingPlaceStats(wp: WeddingPlaceDetailDto) {
+    this.weddingPlaceService
+      .getWeddingPlaceStats(wp.weddingPlaceId)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.toastrService.info(
+            `${wp.weddingPlaceName} - ${wp.provinceName} tam  ${res.data.totalRentals} kez kiralandı. Bu mekandan toplam geliriniz ${res.data.totalIncome}`,
+            'Mekan İstatistikleri',
+            { timeOut: 5000 }
+          );
+        }
+      });
+  }
 }

@@ -19,6 +19,7 @@ export class RentalService {
       this.rentalsUrl + 'getdetails'
     );
   }
+
   getOccupiedDates(wpId: number): Observable<ListResponseModel<Date>> {
     return this._http.get<ListResponseModel<Date>>(
       this.rentalsUrl + 'getoccupieddates?wpId=' + wpId

@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
 import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
+import { RentalsComponent } from './components/admin/rentals/rentals.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: '', component: HomeAdminComponent },
       { path: 'addweddingplace', component: AddWeddingplaceComponent },
       { path: 'updateweddingplace', component: AddWeddingplaceComponent },
+      { path: 'rentals', component: RentalsComponent },
     ],
   },
 
