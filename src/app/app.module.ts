@@ -20,7 +20,6 @@ import { environment } from 'src/environments/environment.development';
 import { NZ_I18N, tr_TR } from 'ng-zorro-antd/i18n';
 import { NZ_CONFIG } from 'ng-zorro-antd/core/config';
 import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-layout.component';
-import { HomeComponent } from './components/home/home.component';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FooterComponent } from './components/footer/footer.component';
 import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
@@ -50,13 +49,21 @@ import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { InputMaskModule } from 'primeng/inputmask';
 import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
-import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
 import { WeddingplaceRentComponent } from './components/wedding-places/weddingplace-rent/weddingplace-rent.component';
 import { RentalsComponent } from './components/admin/rentals/rentals.component';
-import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-
+import { FindEasyComponent } from './pages/find-easy/find-easy.component';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { PlacesComponent } from './components/places/places.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NzAffixModule } from 'ng-zorro-antd/affix';
+import { SidebarModule } from 'primeng/sidebar';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { PaginatorModule } from 'primeng/paginator';
 registerLocaleData(tr);
 const ngZorroConfig: NzConfig = {
   theme: lightTheme,
@@ -65,7 +72,6 @@ const ngZorroConfig: NzConfig = {
   declarations: [
     AppComponent,
     PrimaryLayoutComponent,
-    HomeComponent,
     FooterComponent,
     WeddingPlacesComponent,
     SearchWeddingplaceComponent,
@@ -77,10 +83,11 @@ const ngZorroConfig: NzConfig = {
     UpdateWeddingplaceComponent,
     ProfileComponent,
     WeddingplaceDetailComponent,
-    WeddingplaceItemsComponent,
     WeddingplaceDetailsComponent,
     WeddingplaceRentComponent,
     RentalsComponent,
+    FindEasyComponent,
+    PlacesComponent,
   ],
   imports: [
     CommonModule,
@@ -96,7 +103,6 @@ const ngZorroConfig: NzConfig = {
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
     }),
-    TableModule,
     DynamicDialogModule,
     ConfirmDialogModule,
     CheckboxModule,
@@ -114,8 +120,17 @@ const ngZorroConfig: NzConfig = {
     NzResultModule,
     NzModalModule,
     InputMaskModule,
-    NzTableModule,
+    TableModule,
     NzDividerModule,
+    PanelMenuModule,
+    NzGridModule,
+    NzDrawerModule,
+    DragDropModule,
+    ScrollingModule,
+    NzAffixModule,
+    SidebarModule,
+    NzPaginationModule,
+    PaginatorModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },

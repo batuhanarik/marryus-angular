@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
 import { WeddingPlacesComponent } from './components/wedding-places/wedding-places.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PrimaryLayoutComponent } from './pages/layouts/primary-layout/primary-layout.component';
@@ -8,10 +7,10 @@ import { AdminLayoutComponent } from './pages/layouts/admin-layout/admin-layout.
 import { HomeAdminComponent } from './components/home-admin/home-admin.component';
 import { AddWeddingplaceComponent } from './components/admin/add-weddingplace/add-weddingplace.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { WeddingplaceDetailComponent } from './components/wedding-places/weddingplace-detail/weddingplace-detail.component';
-import { WeddingplaceItemsComponent } from './components/wedding-places/weddingplace-items/weddingplace-items.component';
 import { WeddingplaceDetailsComponent } from './components/wedding-places/weddingplace-details/weddingplace-details.component';
 import { RentalsComponent } from './components/admin/rentals/rentals.component';
+import { FindEasyComponent } from './pages/find-easy/find-easy.component';
+import { PlacesComponent } from './components/places/places.component';
 
 const routes: Routes = [
   {
@@ -22,12 +21,12 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        component: HomeComponent,
+        component: PlacesComponent,
       },
       {
         path: 'weddingplaces',
         component: WeddingPlacesComponent,
-        children: [{ path: '', component: WeddingplaceItemsComponent }],
+        children: [{ path: '', component: PlacesComponent }],
       },
       {
         path: 'detail/:weddingPlaceId',
@@ -36,6 +35,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+      },
+      {
+        path: 'kolayca-bul',
+        component: FindEasyComponent,
       },
     ],
   },

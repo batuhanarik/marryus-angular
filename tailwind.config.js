@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      width:{'76':'18.5rem'}
+    },
     fontFamily:{
-      'monaco':['Monaco','system-ui']
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
     }
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require('@tailwindcss/forms')],
 };

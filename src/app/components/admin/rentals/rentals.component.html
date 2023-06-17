@@ -1,22 +1,26 @@
-<div class="flex justify-center overflow-x-scroll w-full">
-  <nz-table #basicTable [nzData]="rentals">
-    <thead>
-      <tr>
-        <th>Müşteri Adı</th>
-        <th>Mekan Adı</th>
-        <th>Şehir</th>
-        <th>Kiralama Tarihi</th>
-        <th>Kiralama Fiyatı</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{ data.customerName }}</td>
-        <td>{{ data.placeName }}</td>
-        <td>{{ data.plateName }}</td>
-        <td>{{ data.rentDate }}</td>
-        <td>{{ data.rentPrice }}</td>
-      </tr>
-    </tbody>
-  </nz-table>
+<div class="flex justify-center">
+  <div class="overflow-x-auto">
+    <table class="table table-auto">
+      <thead class="text-violet-700">
+        <tr>
+          <th>#</th>
+          <th>Müşteri Adı</th>
+          <th>Mekan Adı</th>
+          <th>Şehir</th>
+          <th>Kiralama Tarihi</th>
+          <th>Kiralama Fiyatı</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of rentals; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.customerName }}</td>
+          <td>{{ data.placeName }}</td>
+          <td>{{ data.plateName }}</td>
+          <td>{{ data.rentDate }}</td>
+          <td>{{ data.rentPrice }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -78,7 +78,10 @@ export class LoginComponent {
       )
       .subscribe((res: any) => {
         if (res.token) {
-          if (res.token != null) this.toastrService.success('Giriş Başarılı.');
+          if (res.token != null)
+            this.toastrService.success(
+              `Hoşgeldin ${this._service.claims.fullName}`
+            );
         }
       });
   }

@@ -10,6 +10,7 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreditCard } from 'src/app/models/creditCard';
 import { Rental } from 'src/app/models/rental';
 import { AuthService } from 'src/app/services/auth.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { RentalService } from 'src/app/services/rental.service';
 
 @Component({
@@ -41,7 +42,7 @@ export class WeddingplaceRentComponent implements OnInit {
     private toastrService: ToastrService,
     public config: DynamicDialogConfig,
     public ref: DynamicDialogRef,
-    private cdr: ChangeDetectorRef
+    private helper: HelperService
   ) {}
   ngOnInit(): void {
     this.today = new Date();
@@ -146,6 +147,8 @@ export class WeddingplaceRentComponent implements OnInit {
       customerId: this.authService.claims.userId,
       rentDate: this.rentDate,
       returnDate: this.rentDate,
+      paidAmount: this.totalRentPrice,
+      totalDiscount: this.config.data.discountRate,
     };
 
     this.rentalService.rent(rental, card).subscribe((result) => {
@@ -154,6 +157,8 @@ export class WeddingplaceRentComponent implements OnInit {
         if (result.success) {
           this.toastrService.success(result.message);
           this.ref.close();
+          const htmlContent = `<h1>SA</h1>`;
+          this.helper.saveToPdf(htmlContent);
         } else {
           this.toastrService.error(result.message);
         }

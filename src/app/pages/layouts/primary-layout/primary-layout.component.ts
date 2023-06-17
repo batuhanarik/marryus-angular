@@ -18,6 +18,7 @@ export class PrimaryLayoutComponent {
     this._iconService.useJsonpLoading();
   }
   ngOnInit() {
+    window.scrollTo(0, 0);
     this.getFullName();
   }
   getFullName() {

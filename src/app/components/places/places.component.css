@@ -1,0 +1,17 @@
+.filter-container {
+    position: fixed;
+    top: 64px;
+    right: 0;
+    z-index: 9999; /* Gerekirse değeri ayarlayabilirsiniz */
+  }
+  
+  .button-container {
+    position: fixed;
+    top: 64px;
+    right: 24px; /* Gerekirse değeri ayarlayabilirsiniz */
+    z-index: 9999; /* Gerekirse değeri ayarlayabilirsiniz */
+  }
+ 
+  .p-sidebar-left .p-sidebar-sm .p-sidebar-right .p-sidebar-sm{
+    width: 22rem;
+  }

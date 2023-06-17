@@ -1,18 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NzDrawerPlacement } from 'ng-zorro-antd/drawer';
 import { Message } from 'primeng/api';
 import { City } from 'src/app/models/City';
 import { Category } from 'src/app/models/category';
+import { FilterOptions } from 'src/app/models/filterOptions';
 import { WeddingPlaceDetailDto } from 'src/app/models/weddingPlaceDetailDto';
 import { CategoryService } from 'src/app/services/category.service';
 import { CityService } from 'src/app/services/city.service';
 import { WeddingplaceService } from 'src/app/services/weddingplace.service';
 
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
+
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: 'app-places',
+  templateUrl: './places.component.html',
+  styleUrls: ['./places.component.css'],
 })
-export class HomeComponent {
+export class PlacesComponent {
+  first: number = 0;
+  rows: number = 5;
+  pageSize: number = 6;
+  totalItems = 0;
+
+  drawerVisible: boolean = false;
+  placement: NzDrawerPlacement = 'left';
   hasAnyMeasureAgainstAdverseWeatherConditions: boolean = false;
   hasMenuTasting: boolean = false;
   hasHandicapEntrance: boolean = false;
@@ -32,6 +49,7 @@ export class HomeComponent {
   filterText: string = '';
   noResultText: string = 'Üzgünüz, hayalinizdeki düğün yerini bulamadık...';
   messagesNoResult: Message[];
+  @ViewChild('scrollRef', { static: true }) scrollRef: ElementRef;
   constructor(
     private weddingPlaceService: WeddingplaceService,
     private cityService: CityService,
@@ -39,10 +57,18 @@ export class HomeComponent {
     private formBuilder: FormBuilder
   ) {}
   ngOnInit(): void {
-    this.getWeddingPlaces();
+    this.createFilterForm();
+
+    this.getDetailsByFilter();
     this.getCities();
     this.getCategories();
-    this.createFilterForm();
+    this.messagesNoResult = [
+      {
+        severity: 'error',
+        summary: 'Üzgünüz :(',
+        detail: 'Hayalinizdeki düğün yeri henüz yok...',
+      },
+    ];
   }
   getWeddingPlaces() {
     this.loading = true;
@@ -50,6 +76,42 @@ export class HomeComponent {
       this.weddingPlaces = res.data;
       this.loading = false;
     });
+  }
+  getWeddingPlaceDetailsByPagination(event: any) {
+    this.loading = true;
+    this.scrollRef.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    const page = event.page + 1;
+    console.log(page);
+    const pageSize = this.pageSize;
+    this.weddingPlaceService
+      .getWeddingPlaceDetailsByPagination(page, pageSize)
+      .subscribe((res: any) => {
+        this.weddingPlaces = res.data;
+        this.totalItems = res.data.length;
+        this.loading = false;
+      });
+  }
+
+  getDetailsByFilter() {
+    this.loading = true;
+    this.scrollRef.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+
+    this.weddingPlaceService
+      .getDetailsByFilter(this.filterForm.value as FilterOptions)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.weddingPlaces = res.data;
+          console.log(this.weddingPlaces);
+          this.filterForm.reset();
+          this.loading = false;
+        }
+      });
   }
 
   getWeddingPlaceDetailsByCity(id: number) {
@@ -60,7 +122,6 @@ export class HomeComponent {
         this.weddingPlaces = res.data;
         this.loading = false;
       });
-    console.log(id);
   }
 
   getCities() {
@@ -95,12 +156,23 @@ export class HomeComponent {
     });
   }
   clearAllFilters() {
-    // document.getElementById('p-accordiontab-0').click();
+    this.scrollRef.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
     this.filterForm.reset();
     this.loading = true;
     this.weddingPlaceService.getWeddingPlaceDetails().subscribe((res: any) => {
       this.weddingPlaces = res.data;
       this.loading = false;
     });
+  }
+
+  changeDrawerState() {
+    this.drawerVisible = !this.drawerVisible;
+  }
+  onPageChange(event: PageEvent) {
+    this.first = event.first;
+    this.rows = event.rows;
   }
 }

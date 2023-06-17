@@ -22,7 +22,7 @@
     </ng-template>
   </p-galleria>
   <div *ngIf="isMobileDevice; else largeDevicesView">
-    <!-- Telefon -->
+    <!-- Fiyat -->
     <div>
       <div class="chat chat-start mb-3">
         <div class="chat-bubble bg-cyan-500">Fiyatlarınız Nedir ?</div>
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Düğün öncesi menü tadımı var mı -->
-    <div *ngIf="currentWeddingPlace.isFoodIncluded">
+    <div *ngIf="currentWeddingPlace.hasMenuTasting">
       <div class="chat chat-start mb-3">
         <div class="chat-bubble bg-[#DB7093]">
           Düğün öncesi menü tadımı var mı?
@@ -235,27 +235,176 @@
 
 <ng-template #largeDevicesView>
   <div>
-    <!-- Fiyat -->
-    <div></div>
-    <!-- Açık Adres -->
-    <div></div>
-    <!-- Telefon Numaranız -->
-    <div></div>
-    <!-- Alkol -->
-    <div></div>
-    <!-- Yemek -->
-    <div></div>
-    <!-- menü tadımı -->
-    <div></div>
-    <!-- kokteyl -->
-    <div></div>
-    <!-- max kapasite -->
-    <div></div>
-    <!-- after parti alanı -->
-    <div></div>
-    <!-- vale hizmeti -->
-    <div></div>
-    <!-- engelli girişi -->
-    <div></div>
+    <div class="collapse">
+      <span
+        (click)="isCheckedDetails = !isCheckedDetails"
+        class="collapse-title text-xl select-none font-medium text-purple-700"
+      >
+        Detayları <span *ngIf="!isCheckedDetails">Gör</span>
+        <span *ngIf="isCheckedDetails">Gizle</span>
+        <span
+          *ngIf="!isCheckedDetails"
+          (click)="isCheckedDetails = !isCheckedDetails"
+          nz-icon
+          nzType="down"
+          nzTheme="outline"
+        ></span>
+        <span
+          *ngIf="isCheckedDetails"
+          nz-icon
+          nzType="up"
+          nzTheme="outline"
+        ></span>
+      </span>
+      <input [checked]="isCheckedDetails" type="checkbox" />
+
+      <div class="collapse-content">
+        <div class="flex flex-col ml-5">
+          <!-- Fiyat -->
+          <div class="my-1">
+            <span class="text-lg"> Fiyatlarınız Nedir ? (Kişi Başı) </span
+            ><span class="text-xl">
+              Haftaiçi Fiyatımız
+              <b class="text-purple-700">{{
+                currentWeddingPlace.priceWeekday
+              }}</b>
+              TL, Haftasonu Fiyatımız ise
+              <b class="text-purple-700">{{
+                currentWeddingPlace.priceWeekend
+              }}</b>
+              TL'dir.
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- Kapasite -->
+          <div lass="my-1">
+            <span class="text-lg"> Maksimum Kapasiteniz Nedir? </span
+            ><span class="text-xl">
+              Mekanımız
+              <strong class="text-sky-800">
+                {{ currentWeddingPlace.capacityFirst }} -
+                {{ currentWeddingPlace.capacityLast }}
+              </strong>
+              Kişiliktir.
+            </span>
+          </div>
+          <hr class="w-1/3" />
+
+          <!-- Yemek -->
+          <div class="my-1">
+            <span class="text-lg">Mekanda yemek seçenekleriniz var mı ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.isFoodIncluded
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{ currentWeddingPlace.isFoodIncluded ? "Evet" : "Hayır" }}
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- Alkol -->
+          <div class="my-1">
+            <span class="text-lg">Mekanda alkollü içecek bulunuyor mu ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.isAlcoholIncluded
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{ currentWeddingPlace.isAlcoholIncluded ? "Evet" : "Hayır" }}
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- Kokteyl -->
+          <div class="my-1">
+            <span class="text-lg"> Mekanda kokteyl var mı ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.isCocktailIncluded
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{ currentWeddingPlace.isCocktailIncluded ? "Evet" : "Hayır" }}
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- Menü Tadımı -->
+          <div class="my-1">
+            <span class="text-lg"> Düğün öncesi menü tadımı var mı? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.hasMenuTasting
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{ currentWeddingPlace.hasMenuTasting ? "Evet" : "Hayır" }}
+            </span>
+          </div>
+
+          <hr class="w-1/3" />
+          <!-- Vale -->
+          <div class="my-1">
+            <span class="text-lg"> Vale hizmeti var mı ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.hasValetService
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{ currentWeddingPlace.hasValetService ? "Evet" : "Hayır" }}
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- engelli girişi -->
+          <div class="my-1">
+            <span class="text-lg"> Mekanda engelli girişi var mı ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.hasHandicapEntrance
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{
+                currentWeddingPlace.hasHandicapEntrance
+                  ? "Evet, engelli girişimiz bulunmaktadır."
+                  : "Hayır, engelli girişimiz bulunmamaktadır."
+              }}
+            </span>
+          </div>
+          <hr class="w-1/3" />
+          <!-- Menü Tadımı -->
+          <div class="my-1">
+            <span class="text-lg"> After parti alanı var mı ? </span
+            ><span
+              class="text-xl"
+              [ngClass]="
+                currentWeddingPlace.hasAfterPartyArea
+                  ? 'text-green-500'
+                  : 'text-red-600'
+              "
+            >
+              {{
+                currentWeddingPlace.hasAfterPartyArea
+                  ? "Evet, after parti alanımız bulunmaktadır."
+                  : "Hayır, after parti alanımız bulunmamaktadır."
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-template>

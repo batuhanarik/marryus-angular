@@ -51,15 +51,12 @@
     class="drawer-toggle"
     [checked]="isSidebarVisible"
   />
-  <div style="overflow-y: auto" class="drawer-content">
-    <div class="min-h-screen bg-gray-100 p-4">
+  <div style="overflow-y: auto" class="flex drawer-content justify-center">
+    <div class="min-h-screen">
       <router-outlet />
     </div>
   </div>
-  <div
-    class="drawer-side w-[90px] bg-white"
-    [class.shadow-md]="isSidebarVisible"
-  >
+  <div class="drawer-side w-[90px]" [class.shadow-md]="isSidebarVisible">
     <label
       for="primary-drawer"
       class="drawer-overlay !bg-white opacity-100"
@@ -83,18 +80,6 @@
         </div>
       </li>
 
-      <li>
-        <div
-          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
-          [routerLink]="['weddingplaces']"
-          [routerLinkActive]="'border-l-primary text-primary'"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <span class="text-xl" nz-icon nzType="home" nzTheme="outline"></span>
-
-          <button class="mt-2 text-xs">Düğün Yerleri</button>
-        </div>
-      </li>
       <li>
         <div
           class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"

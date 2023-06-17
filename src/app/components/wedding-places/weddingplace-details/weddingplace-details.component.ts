@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WeddingplaceService } from '../../../services/weddingplace.service';
 import { WeddingPlaceDetailDto } from '../../../models/weddingPlaceDetailDto';
-import { Dialog } from 'primeng/dialog';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { WeddingplaceRentComponent } from '../weddingplace-rent/weddingplace-rent.component';
 import { isPlatformBrowser } from '@angular/common';
@@ -13,6 +12,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
   providers: [DialogService],
 })
 export class WeddingplaceDetailsComponent {
+  isCheckedDetails: boolean = false;
   currentWeddingPlace: WeddingPlaceDetailDto;
   wpLoaded: boolean = false;
   isMobileDevice: boolean = false;
@@ -87,7 +87,7 @@ export class WeddingplaceDetailsComponent {
   rent(weddingPlace: WeddingPlaceDetailDto) {
     this.ref = this.dialog.open(WeddingplaceRentComponent, {
       header: 'Düğün Yerini Kirala',
-      width: '50%',
+      width: this.isMobileDevice ? '95%' : '50%',
       contentStyle: { overflow: 'auto' },
       data: weddingPlace,
     });

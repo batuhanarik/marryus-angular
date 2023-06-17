@@ -1,0 +1,257 @@
+<div #scrollRef class="flex flex-1 w-full flex-row">
+  <!-- Filtreleme Alanı -->
+  <div class="lg:flex w-1/3 max-sm:hidden flex-col items-center md:flex">
+    <ng-container *ngTemplateOutlet="filterArea"></ng-container>
+  </div>
+  <div class="flex flex-row flex-wrap w-2/3 max-sm:w-full mb-auto mt-1">
+    <span class="max-sm:contents hidden cursor-pointer">
+      <i
+        (click)="changeDrawerState()"
+        class="pi pi-filter-fill ml-auto mr-5 mt-1"
+        style="color: darksalmon; font-size: 2rem"
+      ></i>
+    </span>
+
+    <app-wedding-place-item
+      [weddingPlace]="weddingPlace"
+      *ngFor="let weddingPlace of weddingPlaces | filterpipe : filterText"
+    />
+    <div class="card flex mx-auto justify-content-center">
+      <p-paginator
+        (onPageChange)="getWeddingPlaceDetailsByPagination($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="weddingPlaces.length"
+        [rowsPerPageOptions]="[6, 12, 18]"
+      ></p-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #filterArea>
+  <div class="lg:grid xl:grid 2xl:grid sm:hidden md:hidden">
+    <h1 style="font-family: auto" class="text-3xl mt-3">DÜĞÜN MEKANLARI</h1>
+    <h4 class="text-red-500">{{ weddingPlaces.length }} Mekan Listeleniyor</h4>
+  </div>
+  <!-- Filteleme Alanı -->
+  <div class="justify-center items-center">
+    <form [formGroup]="filterForm">
+      <h2>Mekan Adı ile Ara</h2>
+      <!-- Mekan Adı Giriniz -->
+      <div class="form-control w-full max-w-xs">
+        <label class=""> </label>
+
+        <span class="p-input-icon-right">
+          <i
+            (click)="getDetailsByFilter()"
+            class="pi pi-search cursor-pointer"
+          ></i>
+          <input
+            formControlName="placeName"
+            class="w-full h-8 border-1 border-solid rounded"
+            placeholder="Örn : Limon Davet"
+            type="text"
+            pInputText
+          />
+        </span>
+      </div>
+      <!-- Fiyat En Az -->
+      <div class="form-control w-full max-w-xs">
+        <label class="">
+          <span class="label-text">Fiyat Giriniz (En Az)</span>
+        </label>
+        <label class="input-group">
+          <span class="text-sm">Kişi Başı</span>
+          <input
+            formControlName="minPriceWeekday"
+            type="number"
+            placeholder="150"
+            class="input input-bordered w-full"
+          />
+          <span>TL</span>
+        </label>
+      </div>
+      <!-- Fiyat En Çok -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Fiyat Giriniz (En Çok)</span>
+        </label>
+        <label class="input-group">
+          <span class="text-sm">Kişi Başı</span>
+          <input
+            type="number"
+            formControlName="maxPriceWeekend"
+            placeholder="400"
+            class="input input-bordered w-full"
+          />
+          <span>TL</span>
+        </label>
+      </div>
+      <!-- Şehir Seçiniz -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Şehir seçiniz.</span>
+        </label>
+        <select class="select select-bordered" formControlName="plateCode">
+          <option selected [value]="null">Tüm Şehirler</option>
+          <option [value]="city.plateCode" *ngFor="let city of cities">
+            {{ city.plateName }}
+          </option>
+        </select>
+        <label class="label"> </label>
+      </div>
+      <!-- Kategori Seçiniz -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Kategori seçiniz.</span>
+        </label>
+        <select class="select select-bordered" formControlName="categoryId">
+          <option [value]="null" selected>Tüm Kategoriler</option>
+          <option
+            [value]="category.categoryId"
+            *ngFor="let category of categories"
+          >
+            {{ category.categoryName }}
+          </option>
+        </select>
+      </div>
+      <!-- Yemekli Menü -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Yemekli menü</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="isFoodIncluded"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Alkollü Menü -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Alkollü menü</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="isAlcoholIncluded"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Kokteylli Menü -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Kokteylli menü</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="isCocktailIncluded"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Olumsuz Havaya Karşı Önlem -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Olumsuz Havaya Karşı Önlem</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="hasAnyMeasureAgainstAdverseWeatherConditions"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Engelli Girişi -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Engelli Girişi</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="hasHandicapEntrance"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Vale Hizmeti -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Vale Hizmeti</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="hasValetService"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Yemek Tadımı -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Düğün Öncesi Yemek Tadımı</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="hasMenuTasting"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <!-- Hazırlık Odası -->
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text">Hazırlık Odası</span>
+        </label>
+        <select
+          class="select select-bordered w-full max-w-xs"
+          formControlName="hasPrepRoom"
+        >
+          <option [value]="true">Evet</option>
+          <option [value]="false">Hayır</option>
+          <option [value]="null" selected>Farketmez</option>
+        </select>
+      </div>
+      <div class="w-full mx-auto flex flex-col mt-2">
+        <button
+          (click)="clearAllFilters()"
+          class="form-control btn bg-[#A855F7] border-0 my-2"
+        >
+          Temizle
+        </button>
+        <button
+          (click)="getDetailsByFilter()"
+          class="form-control btn bg-[#b2dfee] text-base text-black border-0"
+        >
+          Arama Yap
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<div class="card flex justify-content-center">
+  <p-sidebar
+    [(visible)]="drawerVisible"
+    [modal]="false"
+    styleClass="w-10rem"
+    position="right"
+  >
+    <ng-container *ngTemplateOutlet="filterArea"></ng-container>
+  </p-sidebar>
+</div>

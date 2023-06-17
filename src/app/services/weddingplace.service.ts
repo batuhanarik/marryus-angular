@@ -61,6 +61,18 @@ export class WeddingplaceService {
       this.weddingPlacesUrl + '/getdetailsbycity?id=' + id
     );
   }
+  getWeddingPlaceDetailsByPagination(
+    page: number,
+    pageSize: number
+  ): Observable<ListResponseModel<WeddingPlaceDetailDto>> {
+    return this._http.get<ListResponseModel<WeddingPlaceDetailDto>>(
+      this.weddingPlacesUrl +
+        '/getdetailsbypagination?page=' +
+        page +
+        '&pageSize=' +
+        pageSize
+    );
+  }
 
   getDetailsByFilter(
     filterOptions: FilterOptions

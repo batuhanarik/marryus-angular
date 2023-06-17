@@ -1,9 +1,11 @@
-<div class="flex flex-wrap mx-6">
-  <div class="card glass md:w-96 h-[26rem] justify-items-stretch mx-auto my-2">
-    <figure>
+<div *ngIf="weddingPlace" class="mx-4">
+  <div
+    class="card glass 2xl:w-76 xl:w-76 lg:w-76 lg:justify-center md:w-full sm:jus h-[26rem] xl:justify-center justify-start my-2"
+  >
+    <figure style="height: 200px">
       <div class="h-auto">
         <img
-          class=""
+          style="aspect-ratio: 1"
           src="{{ weddingPlace.weddingPlaceImages[0].imagePath | apiImage }}"
         />
       </div>
@@ -16,9 +18,10 @@
       <div class="card-actions justify-end">
         <button
           routerLink="/detail/{{ weddingPlace.weddingPlaceId }}"
-          class="btn btn-primary"
+          type="button"
+          class="absolute bottom-3 right-2 text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
         >
-          Detaya Git!
+          Mekanı İncele!
         </button>
       </div>
     </div>
