@@ -46,7 +46,6 @@ export class UpdateWeddingplaceComponent {
   }
 
   getWeddingPlace() {
-    console.log(this.config.data);
     this.weddingPlaceService
       .getWeddingPlaceById(this.config.data.weddingPlaceId)
       .subscribe((res: any) => {
@@ -55,7 +54,6 @@ export class UpdateWeddingplaceComponent {
           this.createWeddingPlaceUpdateForm();
           this.getWeddingPlaceImages();
           this.wpLoaded = true;
-          console.log(res.data);
         }
       });
   }
@@ -65,7 +63,6 @@ export class UpdateWeddingplaceComponent {
       .subscribe((res: any) => {
         if (res.success) {
           this.images = res.data;
-          console.log(this.images);
           this.imagesLoaded = true;
         }
       });
@@ -139,6 +136,9 @@ export class UpdateWeddingplaceComponent {
       .subscribe((result) => {
         if (result.success) {
           this.toastrService.success(result.message);
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         }
       });
   }
