@@ -55,6 +55,7 @@ export class HomeAdminComponent {
     this.modal.confirm({
       nzTitle: '<i>Düğün yerinizi silmek istiyor musunuz?</i>',
       nzContent: '',
+      nzCentered: true,
       nzOnOk: () => this.deleteWeddingPlace(weddingPlace),
     });
   }
@@ -78,7 +79,7 @@ export class HomeAdminComponent {
       .subscribe((res: any) => {
         if (res.success) {
           this.toastrService.info(
-            `${wp.weddingPlaceName} - ${wp.provinceName} tam  ${res.data.totalRentals} kez kiralandı. Bu mekandan toplam geliriniz ${res.data.totalIncome}`,
+            `${wp.weddingPlaceName} - ${wp.provinceName} tam  ${res.data.totalRentals} kez kiralandı. Bu mekandan toplam geliriniz ${res.data.totalIncome} TL'dir`,
             'Mekan İstatistikleri',
             { timeOut: 5000 }
           );

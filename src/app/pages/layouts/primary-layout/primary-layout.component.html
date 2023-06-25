@@ -97,6 +97,18 @@
           <button class="mt-2 text-xs">Yönetim Paneli</button>
         </div>
       </li>
+      <li>
+        <div
+          class="duration-250 flex h-16 cursor-pointer flex-col items-center justify-center border-l-4 border-r-4 border-transparent px-1 transition ease-out hover:bg-gray-200 hover:ease-in"
+          [routerLink]="['kolayca-bul']"
+          [routerLinkActive]="'border-l-primary text-primary'"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="text-xl" nz-icon nzType="swap" nzTheme="outline"></span>
+
+          <button class="mt-2 text-xs">Hakkımızda</button>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
